@@ -10,6 +10,33 @@ Deploying the Online Boutique sample apps in Humanitec consists in 4 main steps:
 - [Deploy the Online Boutique Workloads](#deploy-the-online-boutique-workloads)
 - [Enjoy!](#test-the-online-boutique-website)
 
+```mermaid
+flowchart LR
+  subgraph Humanitec
+    direction LR
+    subgraph onlineboutique-app [Online Boutique App]
+        subgraph Development
+          direction LR
+          cartservice-workload([cartservice])
+          frontend-workload([frontend])
+        end
+    end
+    subgraph Resources
+        in-cluster-redis>in-cluster-redis]
+    end
+  end
+  subgraph cloud [Humanitec's Cloud]
+      direction LR
+      subgraph onlineboutique
+          frontend{{frontend}}-->cartservice{{cartservice}}
+          cartservice-->redis-cart-db[(redis-cart)]
+      end
+  end
+  onlineboutique-app-.->onlineboutique
+  in-cluster-redis-.->redis-cart-db
+  enduser((End user))-->frontend
+```
+
 ```bash
 export HUMANITEC_TOKEN=FIXME
 export HUMANITEC_ORG=FIXME
