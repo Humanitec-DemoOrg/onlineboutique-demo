@@ -26,5 +26,5 @@ jobs:
               score-humanitec run \
                 --env development \
                 -f apps/$w/score.yaml \
-                --extensions apps/$w/humanitec.score.yaml \
+                --extensions apps/$w/humanitec.score.yaml; \
           done
