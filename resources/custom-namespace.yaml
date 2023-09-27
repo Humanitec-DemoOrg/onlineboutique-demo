@@ -10,7 +10,7 @@ object:
     values:
       templates:
         init: |
-          name: \${context.env.id}-\${context.app.id}
+          name: ${context.env.id}-${context.app.id}
         manifests: |-
           namespace.yaml:
             location: cluster
