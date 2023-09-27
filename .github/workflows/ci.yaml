@@ -6,6 +6,9 @@ on:
   push:
 jobs:
   job:
+    strategy:
+      matrix:
+        apps: ["cartservice", "checkoutservice", "currencyservice", "emailservice", "frontend", "loadgenerator", "paymentservice", "productcatalogservice", "recommendationservice", "shippingservice"]
     runs-on: ubuntu-22.04
     env:
       SCORE_HUMANITEC_VERSION: 'latest'
@@ -20,11 +23,7 @@ jobs:
           version: ${{ env.SCORE_HUMANITEC_VERSION }}
       - name: score-humanitec run
         run: |
-          WORKLOADS=$(ls apps/)
-          for w in ${WORKLOADS}; \
-          do \
-              score-humanitec run \
-                --env development \
-                -f apps/$w/score.yaml \
-                --extensions apps/$w/humanitec.score.yaml; \
-          done
+          score-humanitec run \
+              --env development \
+              -f apps/${{ matrix.apps }}/score.yaml \
+              --extensions apps/${{ matrix.apps }}/humanitec.score.yaml
