@@ -12,6 +12,8 @@ Deploying the Online Boutique sample apps in Humanitec consists in 4 main steps:
 - [Deploy the Online Boutique Workloads](#deploy-the-online-boutique-workloads)
 - [Enjoy!](#test-the-online-boutique-website)
 
+As next steps, [there is more if you want](docs/README.md)! ;)
+
 ```mermaid
 flowchart LR
   subgraph Humanitec
