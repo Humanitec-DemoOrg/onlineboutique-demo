@@ -1,0 +1,11 @@
+apiVersion: humanitec.org/v1b1
+profile: humanitec/default-module
+spec:
+  containers:
+    shippingservice:
+      liveness_probe:
+        port: 50051
+        type: grpc
+      readiness_probe:
+        port: 50051
+        type: grpc
