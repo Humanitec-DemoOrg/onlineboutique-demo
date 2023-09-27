@@ -1,0 +1,31 @@
+name: ci
+permissions:
+  contents: read
+  id-token: write
+on:
+  push:
+jobs:
+  job:
+    needs: containers
+    runs-on: ubuntu-22.04
+    env:
+      SCORE_HUMANITEC_VERSION: 'latest'
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: install score-humanitec
+        uses: score-spec/setup-score@v2
+        with:
+          file: score-humanitec
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ env.SCORE_HUMANITEC_VERSION }}
+      - name: score-humanitec run
+        run: |
+          WORKLOADS=$(ls apps/)
+          for w in ${WORKLOADS}; \
+          do \
+              score-humanitec run \
+                --env development \
+                -f apps/$w/score.yaml \
+                --extensions apps/$w/humanitec.score.yaml \
+          done
