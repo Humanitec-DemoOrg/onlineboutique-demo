@@ -2,6 +2,8 @@
 <img src="https://github.com/GoogleCloudPlatform/microservices-demo/raw/main/src/frontend/static/icons/Hipster_HeroLogoMaroon.svg" width="300" alt="Online Boutique" />
 </p>
 
+[![ci](https://github.com/Humanitec-DemoOrg/onlineboutique-demo/actions/workflows/ci.yaml/badge.svg)](https://github.com/Humanitec-DemoOrg/onlineboutique-demo/actions/workflows/ci.yaml)
+
 Repository containing all the resources to deploy the [Online Boutique sample apps](https://github.com/GoogleCloudPlatform/microservices-demo) with Score and Humanitec.
 
 Deploying the Online Boutique sample apps in Humanitec consists in 4 main steps:
