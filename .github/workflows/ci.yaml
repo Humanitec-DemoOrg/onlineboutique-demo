@@ -6,7 +6,6 @@ on:
   push:
 jobs:
   job:
-    needs: containers
     runs-on: ubuntu-22.04
     env:
       SCORE_HUMANITEC_VERSION: 'latest'
