@@ -33,11 +33,11 @@ flowchart LR
       direction LR
       subgraph onlineboutique
           frontend{{frontend}}-->cartservice{{cartservice}}
-          cartservice-->redis-cart-db[(redis-cart)]
+          cartservice-->redis-cart
       end
   end
   onlineboutique-app-.->onlineboutique
-  in-cluster-redis-.->redis-cart-db
+  in-cluster-redis-.->redis-cart
   enduser((End user))-->frontend
 ```
 
