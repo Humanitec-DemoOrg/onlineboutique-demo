@@ -1,2 +1,4 @@
 - [Customize the `securityContext` of the Deployments](custom-workload.md)
 - [Customize the name of the Namespace and add PSS label](custom-namespace.md)
+- [Bring your own GKE cluster](byo-gke.md)
+- [Bring your own Google Cloud Logging](byo-gcp-logging.md)
