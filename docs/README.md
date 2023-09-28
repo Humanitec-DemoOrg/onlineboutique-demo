@@ -38,7 +38,7 @@ flowchart LR
         subgraph ingress-controller
             nginx{{nginx}}
         end
-        subgraph onlineboutique
+        subgraph dev-gcp-onlineboutique
             frontend-->cartservice
             cartservice-->redis-cart
         end
@@ -49,7 +49,7 @@ flowchart LR
     gke-logging-connection-.->gke-admin-gsa
     gke-admin-gsa-->gke
     in-cluster-redis-.->redis-cart
-    onlineboutique-app-->onlineboutique
+    onlineboutique-app-->dev-gcp-onlineboutique
   end
   enduser((End user))-->nginx
 ```
