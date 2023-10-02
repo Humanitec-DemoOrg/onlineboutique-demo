@@ -65,6 +65,6 @@ resources:
     type: service
 service:
   ports:
-    grpc:
+    http:
       port: 80
       targetPort: 8080
