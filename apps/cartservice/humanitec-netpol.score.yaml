@@ -1,0 +1,36 @@
+apiVersion: humanitec.org/v1b1
+profile: humanitec/default-module
+spec:
+  containers:
+    cartservice:
+      liveness_probe:
+        port: 7070
+        type: grpc
+      readiness_probe:
+        port: 7070
+        type: grpc
+  extraObjects:
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: cartservice
+      spec:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/name: cartservice
+        policyTypes:
+        - Ingress
+        - Egress
+        ingress:
+        - from:
+          - podSelector:
+              matchLabels:
+                app.kubernetes.io/name: frontend
+          - podSelector:
+              matchLabels:
+                app.kubernetes.io/name: checkoutservice
+          ports:
+          - port: 7070
+            protocol: TCP
+        egress:
+        - {}

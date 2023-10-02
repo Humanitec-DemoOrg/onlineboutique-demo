@@ -1,0 +1,36 @@
+apiVersion: humanitec.org/v1b1
+profile: humanitec/default-module
+spec:
+  containers:
+    currencyservice:
+      liveness_probe:
+        port: 7000
+        type: grpc
+      readiness_probe:
+        port: 7000
+        type: grpc
+  extraObjects:
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: currencyservice
+      spec:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/name: currencyservice
+        policyTypes:
+        - Ingress
+        - Egress
+        ingress:
+        - from:
+          - podSelector:
+              matchLabels:
+                app.kubernetes.io/name: frontend
+          - podSelector:
+              matchLabels:
+                app.kubernetes.io/name: checkoutservice
+          ports:
+          - port: 7000
+            protocol: TCP
+        egress:
+        - {}

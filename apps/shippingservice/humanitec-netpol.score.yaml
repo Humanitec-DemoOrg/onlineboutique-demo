@@ -1,0 +1,36 @@
+apiVersion: humanitec.org/v1b1
+profile: humanitec/default-module
+spec:
+  containers:
+    shippingservice:
+      liveness_probe:
+        port: 50051
+        type: grpc
+      readiness_probe:
+        port: 50051
+        type: grpc
+  extraObjects:
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: shippingservice
+      spec:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/name: shippingservice
+        policyTypes:
+        - Ingress
+        - Egress
+        ingress:
+        - from:
+          - podSelector:
+              matchLabels:
+                app.kubernetes.io/name: frontend
+          - podSelector:
+              matchLabels:
+                app.kubernetes.io/name: checkoutservice
+          ports:
+          - port: 50051
+            protocol: TCP
+        egress:
+        - {}

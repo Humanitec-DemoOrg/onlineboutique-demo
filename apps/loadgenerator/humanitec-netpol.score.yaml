@@ -1,0 +1,16 @@
+apiVersion: humanitec.org/v1b1
+profile: humanitec/default-module
+spec:
+  extraObjects:
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: loadgenerator
+      spec:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/name: loadgenerator
+        policyTypes:
+        - Egress
+        egress:
+        - {}
