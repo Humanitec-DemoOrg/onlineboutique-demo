@@ -1,4 +1,4 @@
-name: Pull Request
+name: frontent-pr
 on:
   pull_request:
     paths:

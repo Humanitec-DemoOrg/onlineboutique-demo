@@ -1,0 +1,21 @@
+name: frontend-close-pr
+on:
+  pull_request:
+    paths:
+      - 'apps/frontend/**'
+      - '.github/workflows/frontend-close-pr.yaml'
+    types:
+      - closed
+env:
+  ENVIRONMENT_ID: pr-${{ github.event.number }}-frontend
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout humctl bin
+        uses: actions/checkout@v3
+      - name: delete humanitec env
+        run: |
+          .github/workflows/bin/humctl delete env ${{ env.ENVIRONMENT_ID }} \
+              --token ${{ secrets.HUMANITEC_TOKEN }} \
+              --context /orgs/${{ secrets.HUMANITEC_ORG }}/apps/${{ vars.APP_NAME }}
