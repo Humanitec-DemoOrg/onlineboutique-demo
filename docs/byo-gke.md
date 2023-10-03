@@ -1,11 +1,11 @@
 ## Bring your own GKE cluster
 
-The goal is to define the connection to your GKE cluster from Humanitec for a dedicated `dev-gcp` Environment. We will provide below the basic requirements that your GKE cluster should meet.
+The goal is to define the connection to your GKE cluster from Humanitec for the Development Environment. We will provide below the basic requirements that your GKE cluster should meet.
 
 As Platform Engineer, in Google Cloud.
 
 ```bash
-ENVIRONMENT=dev-gcp
+ENVIRONMENT=development
 
 PROJECT_ID=FIXME
 gcloud config set project ${PROJECT_ID}
@@ -65,7 +65,7 @@ gcloud iam service-accounts keys create ${GKE_ADMIN_SA_NAME}.json \
     --iam-account ${GKE_ADMIN_SA_ID}
 ```
 
-As Platform Engineer, in Humanitec.
+As Platform Engineer, in Humanitec, for any Environments.
 
 Create the GKE access resource definition for the dedicated Environment:
 ```bash
@@ -87,7 +87,7 @@ object:
     secrets:
       credentials: $(cat ${GKE_ADMIN_SA_NAME}.json)
   criteria:
-    - env_id: ${ENVIRONMENT}
+    - {}
 EOF
 humctl create \
     -f ${CLUSTER_NAME}.yaml
@@ -96,15 +96,6 @@ humctl create \
 Now we need to apply all these resources definitions by deploying the Workloads in a new dedicated Environment.
 
 As Platform Engineer, in Humanitec.
-
-Create the new dedicatd Environment by cloning the existing `development` Environment from its latest Deployment:
-```bash
-humctl create environment ${ENVIRONMENT} \
-    --name ${ENVIRONMENT} \
-    -t development \
-    --context ${HUMANITEC_CONTEXT}/apps/${ONLINEBOUTIQUE_APP} \
-    --from development
-```
 
 Deploy this new Environment:
 ```bash

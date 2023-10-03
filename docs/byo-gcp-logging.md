@@ -13,7 +13,7 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --role "roles/logging.viewer"
 ```
 
-As Platform Engineer, in Humanitec.
+As Platform Engineer, in Humanitec, for any Environments.
 
 Create the Cloud Logging access resource definition for the dedicated Environment:
 ```bash
@@ -34,7 +34,7 @@ object:
     secrets:
       credentials: \${resources.k8s-cluster#k8s-cluster.outputs.credentials}
   criteria:
-    - env_id: ${ENVIRONMENT}
+    - {}
 EOF
 humctl create \
     -f ${CLUSTER_NAME}-logging.yaml
