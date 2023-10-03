@@ -62,6 +62,47 @@ flowchart LR
   subgraph Humanitec
     direction LR
     subgraph onlineboutique-app [Online Boutique App]
+      subgraph staging
+        direction LR
+        cartservice-workload([cartservice])
+        frontend-workload([frontend])
+      end
+    end
+    subgraph Resources
+        gke-staging-connection>gke-staging-connection]
+        gke-logging-connection>gke-logging-connection]
+        dynamic-redis-cart-connection>dynamic-redis-cart-connection]
+    end
+  end
+  subgraph Google Cloud
+    direction TB
+    subgraph gke
+        subgraph ingress-controller
+            nginx{{nginx}}
+        end
+        subgraph staging-onlineboutique
+            frontend-->cartservice
+        end
+        nginx-->frontend
+    end
+    gke-admin-gsa[\gke-admin-gsa/]
+    gke-staging-connection-.->gke-admin-gsa
+    gke-logging-connection-.->gke-admin-gsa
+    gke-admin-gsa-->gke
+    dynamic-redis-cart-connection-.->memorystore[(memorystore)]
+    onlineboutique-app-->staging-onlineboutique
+    cartservice-->memorystore
+  end
+  enduser((End user))-->nginx
+```
+
+- [Create dynamically a new Memorystore (Redis) instance](dynamic-memorystore.md)
+
+```mermaid
+flowchart LR
+  subgraph Humanitec
+    direction LR
+    subgraph onlineboutique-app [Online Boutique App]
       subgraph production
         direction LR
         cartservice-workload([cartservice])
@@ -70,6 +111,7 @@ flowchart LR
     end
     subgraph Resources
         gke-production-connection>gke-production-connection]
+        gke-logging-connection>gke-logging-connection]
         existing-redis-cart-connection>existing-redis-cart-connection]
     end
   end
@@ -86,6 +128,7 @@ flowchart LR
     end
     gke-admin-gsa[\gke-admin-gsa/]
     gke-production-connection-.->gke-admin-gsa
+    gke-logging-connection-.->gke-admin-gsa
     gke-admin-gsa-->gke
     existing-redis-cart-connection-.->memorystore[(memorystore)]
     onlineboutique-app-->production-onlineboutique

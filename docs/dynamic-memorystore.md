@@ -1,72 +1,62 @@
-## Bring your own Memorystore (Redis) instance
+## Create dynamically a new Memorystore (Redis) instance
 
 The goal is to define the connection to your Memorystore (Redis) instance from Humanitec for a dedicated `dev-gcp` Environment. We will provide below the basic requirements that your Memorystore (Redis) instance should meet.
 
 You need to [define your GKE cluster in Humanitec](byo-gke.md) first.
 
-We are defining this use case for the Production Environment:
+We are defining this use case for the Staging Environment:
 ```bash
-ENVIRONMENT=production
+ENVIRONMENT=staging
 
 humctl create environment-type ${ENVIRONMENT}
 ```
 
 As Platform Engineer, in Google Cloud.
 
-Create the Memorystore (Redis) database with a password in same region and network as the GKE cluster:
+Create the GSA to provision the Terraform resources from Humanitec:
 ```bash
-gcloud services enable redis.googleapis.com
-
-REDIS_NAME=redis-cart-${ENVIRONMENT}
-gcloud redis instances create ${REDIS_NAME} \
-    --size 1 \
-    --region ${REGION} \
-    --zone ${ZONE} \
-    --network ${NETWORK} \
-    --redis-version redis_7_0 \
-    --enable-auth
-```
-
-```bash
-REDIS_HOST=$(gcloud redis instances describe ${REDIS_NAME} \
-    --region ${REGION} \
-    --format 'get(host)')
-echo ${REDIS_HOST}
-REDIS_PORT=$(gcloud redis instances describe ${REDIS_NAME} \
-    --region ${REGION} \
-    --format 'get(port)')
-echo ${REDIS_PORT}
-REDIS_AUTH=$(gcloud redis instances get-auth-string ${REDIS_NAME} \
-    --region ${REGION} \
-    --format 'get(authString)')
-echo ${REDIS_AUTH}
+SA_NAME=humanitec-terraform
+SA_ID=${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com
+gcloud iam service-accounts create ${SA_NAME} \
+    --display-name=${SA_NAME}
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member "serviceAccount:${SA_ID}" \
+    --role "roles/editor"
+gcloud iam service-accounts keys create ${SA_NAME}.json \
+    --iam-account ${SA_ID}
 ```
 
 As Platform Engineer, in Humanitec, for Production Environment.
 
-Create the Memorystore (Redis) instance access resource definition for the dedicated Environment:
+Create the associated resource definition in Humanitec:
 ```bash
-cat <<EOF > ${REDIS_NAME}.yaml
+cat <<EOF > memorystore-new.yaml
 apiVersion: core.api.humanitec.io/v1
 kind: Definition
 metadata:
-  id: ${REDIS_NAME}
+  id: memorystore-new
 object:
-  name: ${REDIS_NAME}
+  name: memorystore-new
   type: redis
-  driver_type: humanitec/static
+  driver_type: ${HUMANITEC_ORG}/terraform
   driver_inputs:
     values:
-      host: ${REDIS_HOST}
-      port: ${REDIS_PORT}
+      append_logs_to_error: true
+      source:
+        path: resources/memorystore-new
+        rev: refs/heads/main
+        url: https://github.com/Humanitec-DemoOrg/google-cloud-reference-architecture.git
+      variables:
+        project_id: ${PROJECT_ID}
+        region: ${REGION}
+        network: ${NETWORK}
     secrets:
-      password: ${REDIS_AUTH}
-      user: ""
+      variables:
+        credentials: $(cat ${SA_NAME}.json | jq -r tostring)
   criteria:
-    - env_type: ${ENVIRONMENT}
-EOF
+    - env_id: ${ENVIRONMENT}
 humctl create \
-    -f ${REDIS_NAME}.yaml
+    -f memorystore-new.yaml
 ```
 
 Now we need to apply all these resources definitions by deploying the Workloads in a new dedicated Environment.
