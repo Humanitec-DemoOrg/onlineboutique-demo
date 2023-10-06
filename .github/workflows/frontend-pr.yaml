@@ -6,7 +6,6 @@ on:
       - '.github/workflows/frontend-pr.yaml'
 permissions:
   contents: read
-  id-token: write
   pull-requests: write
 env:
   WORKLOAD_FOLDER: 'apps/frontend/'
