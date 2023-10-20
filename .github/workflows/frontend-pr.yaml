@@ -9,8 +9,8 @@ permissions:
   pull-requests: write
 env:
   WORKLOAD_FOLDER: 'apps/frontend/'
-  BASE_ENVIRONMENT: 'development'
-  ENVIRONMENT_TYPE: 'development'
+  BASE_ENVIRONMENT: 'openshift'
+  ENVIRONMENT_TYPE: 'openshift'
   ENVIRONMENT_ID: pr-${{ github.event.number }}-frontend
   ENVIRONMENT_NAME: PR-${{ github.event.number }}
   SCORE_HUMANITEC_VERSION: 'latest'
