@@ -7,6 +7,6 @@ humctl create app-value \
 
 humctl create app-value \
     cymbal-branding \
-    false \
+    true \
     --context ${HUMANITEC_CONTEXT}/apps/${APP}
 ```
