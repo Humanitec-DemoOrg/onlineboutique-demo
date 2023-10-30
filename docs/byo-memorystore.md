@@ -61,7 +61,7 @@ object:
       port: ${REDIS_PORT}
     secrets:
       password: ${REDIS_AUTH}
-      user: ""
+      username: ""
   criteria:
     - env_type: ${ENVIRONMENT}
 EOF
