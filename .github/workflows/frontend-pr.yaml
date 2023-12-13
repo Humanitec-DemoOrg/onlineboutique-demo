@@ -22,9 +22,10 @@ jobs:
         uses: actions/checkout@v3
       - name: create humanitec env
         run: |
-          .github/workflows/bin/humctl create environment ${{ env.ENVIRONMENT_ID }} \
+          humctl create environment ${{ env.ENVIRONMENT_ID }} \
               --token ${{ secrets.HUMANITEC_TOKEN }} \
-              --context /orgs/${{ secrets.HUMANITEC_ORG }}/apps/${{ vars.APP_NAME }} \
+              --org ${{ secrets.HUMANITEC_ORG }} \
+              --app ${{ vars.APP_NAME }} \
               --name ${{ env.ENVIRONMENT_NAME }} \
               -t ${{ env.ENVIRONMENT_TYPE }} \
               --from ${{ env.BASE_ENVIRONMENT }} \
@@ -54,10 +55,12 @@ jobs:
           IS_DONE=false
           CURRENT_STATUS=""
           while [ "$IS_DONE" = false ]; do
-            CURRENT_STATUS=$(.github/workflows/bin/humctl get environment ${{ env.ENVIRONMENT_ID }} -o json \
+            CURRENT_STATUS=$(humctl get deployment . -o json \
               --token ${{ secrets.HUMANITEC_TOKEN }} \
-              --context /orgs/${{ secrets.HUMANITEC_ORG }}/apps/${{ vars.APP_NAME }} \
-              | jq -r .object.last_deploy.status)
+              --org ${{ secrets.HUMANITEC_ORG }} \
+              --app ${{ vars.APP_NAME }} \
+              --env ${{ env.ENVIRONMENT_ID }} \
+              | jq -r .status.status)
             if [ "$CURRENT_STATUS" = "in progress" ]; then
               echo "Deployment still in progress..."
               sleep 1
@@ -78,14 +81,18 @@ jobs:
         run: |
           ENV_URL=$(jq -r ".metadata.url" score_output.json)
           DEPLOYMENT_ID=$(jq -r ".id" score_output.json)
-          DOMAINS=$(.github/workflows/bin/humctl get active-resources \
+          DOMAINS=$(humctl get active-resources \
                       --token ${{ secrets.HUMANITEC_TOKEN }} \
-                      --context /orgs/${{ secrets.HUMANITEC_ORG }}/apps/${{ vars.APP_NAME }}/envs/${{ env.ENVIRONMENT_ID }} -o json \
-                      | jq -r '. | map(. | select(.object.type == "dns")) | map((.object.res_id | split(".") | .[1]) + ": [" + .object.resource.host + "](https://" + .object.resource.host + ")") | join("\n")')
+                      --org ${{ secrets.HUMANITEC_ORG }} \
+                      --app ${{ vars.APP_NAME }} \
+                      --env ${{ env.ENVIRONMENT_ID }} -o json \
+                      | jq -r '. | map(. | select(.metadata.type == "dns")) | map((.metadata.res_id | split(".") | .[1]) + ": [" + .status.resource.host + "](https://" + .status.resource.host + ")") | join("\n")')
           
-          DEPLOYMENT_ERRORS=$(.github/workflows/bin/humctl get deployment-error \
+          DEPLOYMENT_ERRORS=$(humctl get deployment-error \
               --token ${{ secrets.HUMANITEC_TOKEN }} \
-              --context /orgs/${{ secrets.HUMANITEC_ORG }}/apps/${{ vars.APP_NAME }}/envs/${{ env.ENVIRONMENT_ID }} -o json)
+              --org ${{ secrets.HUMANITEC_ORG }} \
+              --app ${{ vars.APP_NAME }} \
+              --env ${{ env.ENVIRONMENT_ID }} -o json)
           if [ "$DEPLOYMENT_ERRORS" = "[]" ]; then
             echo "## Deployment successfully completed for ${{ env.ENVIRONMENT_NAME }}! :tada:" >> pr_message.txt
             echo "" >> pr_message.txt
@@ -96,7 +103,7 @@ jobs:
             echo "" >> pr_message.txt
             echo '```json' >> pr_message.txt
             echo "" >> pr_message.txt
-            echo "$DEPLOYMENT_ERRORS" | jq .[0].object.message -r >> pr_message.txt
+            echo "$DEPLOYMENT_ERRORS" | jq .[0].status.message -r >> pr_message.txt
             echo "" >> pr_message.txt
             echo '```' >> pr_message.txt
             echo "" >> pr_message.txt
@@ -127,9 +134,10 @@ jobs:
           echo "### Deployment diff:" >> pr_message.txt
           echo '```json' >> pr_message.txt
           echo "" >> pr_message.txt
-          .github/workflows/bin/humctl diff env ${{ env.ENVIRONMENT_ID }} ${{ env.BASE_ENVIRONMENT }} \
+          humctl diff sets env/${{ env.ENVIRONMENT_ID }} env/${{ env.BASE_ENVIRONMENT }} \
               --token ${{ secrets.HUMANITEC_TOKEN }} \
-              --context /orgs/${{ secrets.HUMANITEC_ORG }}/apps/${{ vars.APP_NAME }} -o json >> pr_message.txt
+              --org ${{ secrets.HUMANITEC_ORG }} \
+              --app ${{ vars.APP_NAME }} -o json >> pr_message.txt
           echo "" >> pr_message.txt
           echo '```' >> pr_message.txt
           echo "" >> pr_message.txt

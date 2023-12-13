@@ -70,11 +70,11 @@ As Platform Engineer, in Humanitec, for any Environments.
 Create the GKE access resource definition for the dedicated Environment:
 ```bash
 cat <<EOF > ${CLUSTER_NAME}.yaml
-apiVersion: core.api.humanitec.io/v1
+apiVersion: entity.humanitec.io/v1b1
 kind: Definition
 metadata:
   id: ${CLUSTER_NAME}
-object:
+entity:
   name: ${CLUSTER_NAME}
   type: k8s-cluster
   driver_type: humanitec/k8s-cluster-gke
@@ -100,14 +100,15 @@ As Platform Engineer, in Humanitec.
 Deploy this new Environment:
 ```bash
 humctl deploy env development ${ENVIRONMENT} \
-    --context ${HUMANITEC_CONTEXT}/apps/${ONLINEBOUTIQUE_APP}
+    --app ${ONLINEBOUTIQUE_APP}
 ```
 
 Get the public DNS exposing the `frontend` Workload to test it:
 ```bash
 humctl get active-resources \
-	--context ${HUMANITEC_CONTEXT}/apps/${ONLINEBOUTIQUE_APP}/envs/${ENVIRONMENT} \
+	--app ${ONLINEBOUTIQUE_APP} \
+    --env ${ENVIRONMENT} \
 	-o json \
-	| jq -c '.[] | select(.object.type | contains("dns"))' \
-	| jq -r .object.resource.host
+	| jq -c '.[] | select(.metadata.type | contains("dns"))' \
+	| jq -r .status.resource.host
 ```

@@ -102,7 +102,7 @@ do \
         | jq -r .id); \
 done
 humctl deploy delta ${COMBINED_DELTA} ${ENVIRONMENT} \
-    --context ${HUMANITEC_CONTEXT}/apps/${ONLINEBOUTIQUE_APP}
+    --app ${ONLINEBOUTIQUE_APP}
 ```
 _Note: `loadgenerator` is deployed to generate both: traffic on these apps and data in the database. If you don't want this, feel free to remove it from the above list of `WORKLOADS`._
 
@@ -126,8 +126,9 @@ score-humanitec delta \
 Get the public DNS exposing the `frontend` Workload:
 ```bash
 humctl get active-resources \
-	--context ${HUMANITEC_CONTEXT}/apps/${ONLINEBOUTIQUE_APP}/envs/${ENVIRONMENT} \
+	--app ${ONLINEBOUTIQUE_APP} \
+    --env ${ENVIRONMENT} \
 	-o json \
-	| jq -c '.[] | select(.object.type | contains("dns"))' \
-	| jq -r .object.resource.host
+	| jq -c '.[] | select(.metadata.type | contains("dns"))' \
+	| jq -r .status.resource.host
 ```

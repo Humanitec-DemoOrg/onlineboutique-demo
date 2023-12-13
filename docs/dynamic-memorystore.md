@@ -31,11 +31,11 @@ As Platform Engineer, in Humanitec, for Production Environment.
 Create the associated resource definition in Humanitec:
 ```bash
 cat <<EOF > memorystore-new.yaml
-apiVersion: core.api.humanitec.io/v1
+apiVersion: entity.humanitec.io/v1b1
 kind: Definition
 metadata:
   id: memorystore-new
-object:
+entity:
   name: memorystore-new
   type: redis
   driver_type: ${HUMANITEC_ORG}/terraform
@@ -66,21 +66,22 @@ Create the new dedicatd Environment by cloning the existing `development` Enviro
 humctl create environment ${ENVIRONMENT} \
     --name ${ENVIRONMENT} \
     -t ${ENVIRONMENT} \
-    --context ${HUMANITEC_CONTEXT}/apps/${ONLINEBOUTIQUE_APP} \
+    --app ${ONLINEBOUTIQUE_APP} \
     --from development
 ```
 
 Deploy this new Environment:
 ```bash
 humctl deploy env development ${ENVIRONMENT} \
-    --context ${HUMANITEC_CONTEXT}/apps/${ONLINEBOUTIQUE_APP}
+    --app ${ONLINEBOUTIQUE_APP}
 ```
 
 Get the public DNS exposing the `frontend` Workload to test it:
 ```bash
 humctl get active-resources \
-	--context ${HUMANITEC_CONTEXT}/apps/${ONLINEBOUTIQUE_APP}/envs/${ENVIRONMENT} \
+	--app ${ONLINEBOUTIQUE_APP} \
+  --env ${ENVIRONMENT} \
 	-o json \
-	| jq -c '.[] | select(.object.type | contains("dns"))' \
-	| jq -r .object.resource.host
+	| jq -c '.[] | select(.metadata.type | contains("dns"))' \
+	| jq -r .status.resource.host
 ```

@@ -55,7 +55,6 @@ flowchart LR
 ```
 
 - [Bring your own GKE cluster](byo-gke.md)
-- [Bring your own Google Cloud Logging](byo-gcp-logging.md)
 
 ```mermaid
 flowchart LR
@@ -70,7 +69,6 @@ flowchart LR
     end
     subgraph Resources
         gke-staging-connection>gke-staging-connection]
-        gke-logging-connection>gke-logging-connection]
         dynamic-redis-cart-connection>dynamic-redis-cart-connection]
     end
   end
@@ -87,7 +85,6 @@ flowchart LR
     end
     gke-admin-gsa[\gke-admin-gsa/]
     gke-staging-connection-.->gke-admin-gsa
-    gke-logging-connection-.->gke-admin-gsa
     gke-admin-gsa-->gke
     dynamic-redis-cart-connection-.->memorystore[(memorystore)]
     onlineboutique-app-->staging-onlineboutique
@@ -111,7 +108,6 @@ flowchart LR
     end
     subgraph Resources
         gke-production-connection>gke-production-connection]
-        gke-logging-connection>gke-logging-connection]
         existing-redis-cart-connection>existing-redis-cart-connection]
     end
   end
@@ -128,7 +124,6 @@ flowchart LR
     end
     gke-admin-gsa[\gke-admin-gsa/]
     gke-production-connection-.->gke-admin-gsa
-    gke-logging-connection-.->gke-admin-gsa
     gke-admin-gsa-->gke
     existing-redis-cart-connection-.->memorystore[(memorystore)]
     onlineboutique-app-->production-onlineboutique

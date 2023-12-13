@@ -1,8 +1,8 @@
-apiVersion: core.api.humanitec.io/v1
+apiVersion: entity.humanitec.io/v1b1
 kind: Definition
 metadata:
   id: redis-in-cluster
-object:
+entity:
   name: redis-in-cluster
   type: redis
   driver_type: humanitec/template
