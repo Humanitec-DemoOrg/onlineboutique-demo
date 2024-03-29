@@ -77,48 +77,27 @@ As Developer, in Humanitec.
 ### All in once
 
 ```bash
-FIRST_WORKLOAD="adservice"
-COMBINED_DELTA=$(score-humanitec delta \
-    --app ${ONLINEBOUTIQUE_APP} \
-    --env ${ENVIRONMENT} \
-    --org ${HUMANITEC_ORG} \
-    --token ${HUMANITEC_TOKEN} \
-    --retry \
-    -f apps/${FIRST_WORKLOAD}/score.yaml \
-    --extensions apps/${FIRST_WORKLOAD}/humanitec.score.yaml \
-    | jq -r .id)
-WORKLOADS="cartservice checkoutservice currencyservice emailservice frontend loadgenerator paymentservice productcatalogservice recommendationservice shippingservice"
-for w in ${WORKLOADS}; \
-do \
-    COMBINED_DELTA=$(score-humanitec delta \
-        --app ${ONLINEBOUTIQUE_APP} \
-        --env ${ENVIRONMENT} \
-        --org ${HUMANITEC_ORG} \
-        --token ${HUMANITEC_TOKEN} \
-        --delta ${COMBINED_DELTA} \
-        --retry \
-        -f apps/$w/score.yaml \
-        --extensions apps/$w/humanitec.score.yaml \
-        | jq -r .id); \
-done
-humctl deploy delta ${COMBINED_DELTA} ${ENVIRONMENT} \
-    --app ${ONLINEBOUTIQUE_APP}
+humctl score deploy \
+	--app ${ONLINEBOUTIQUE_APP} \
+	--env ${ENVIRONMENT} \
+	--org ${HUMANITEC_ORG} \
+	--token ${HUMANITEC_TOKEN} \
+	-f apps/${WORKLOAD}/score.yaml \
+    --wait
 ```
-_Note: `loadgenerator` is deployed to generate both: traffic on these apps and data in the database. If you don't want this, feel free to remove it from the above list of `WORKLOADS`._
 
 ### One by one
 
 ```bash
 WORKLOAD=adservice #cartservice checkoutservice currencyservice emailservice frontend loadgenerator paymentservice productcatalogservice recommendationservice shippingservice
-score-humanitec delta \
+humctl score deploy \
 	--app ${ONLINEBOUTIQUE_APP} \
 	--env ${ENVIRONMENT} \
 	--org ${HUMANITEC_ORG} \
 	--token ${HUMANITEC_TOKEN} \
-	--deploy \
-	--retry \
 	-f apps/${WORKLOAD}/score.yaml \
-	--extensions apps/${WORKLOAD}/humanitec.score.yaml
+	--extensions apps/${WORKLOAD}/humanitec.score.yaml \
+    --wait
 ```
 
 ## Test the Online Boutique website
