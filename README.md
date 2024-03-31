@@ -82,7 +82,7 @@ humctl score deploy \
 	--env ${ENVIRONMENT} \
 	--org ${HUMANITEC_ORG} \
 	--token ${HUMANITEC_TOKEN} \
-	-f apps/${WORKLOAD}/score.yaml \
+	--deploy-config apps/score.deploy.yaml \
     --wait
 ```
 
