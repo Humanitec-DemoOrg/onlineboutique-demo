@@ -27,8 +27,7 @@ jobs:
       - name: humctl score deploy
         run: |
           HUMANITEC_CLI_ALPHA_FEATURES=score-deploy humctl score deploy \
-              --artefact-name ${{ vars.APP_NAME }}-${{ env.WORKLOAD_NAME }} \
-              --deploy-config score/score.deploy.yaml \
+              --deploy-config apps/score.deploy.yaml \
               --message ${{ github.ref_name }} \
               --workload-source-url-prefix "https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/apps" \
               --token ${{ secrets.HUMANITEC_TOKEN }} \
