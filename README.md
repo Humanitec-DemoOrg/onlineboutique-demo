@@ -83,7 +83,7 @@ humctl score deploy \
 	--org ${HUMANITEC_ORG} \
 	--token ${HUMANITEC_TOKEN} \
 	--deploy-config apps/score.deploy.yaml \
-    --wait
+	--wait
 ```
 
 ### One by one
@@ -97,7 +97,7 @@ humctl score deploy \
 	--token ${HUMANITEC_TOKEN} \
 	-f apps/${WORKLOAD}/score.yaml \
 	--extensions apps/${WORKLOAD}/humanitec.score.yaml \
-    --wait
+	--wait
 ```
 
 ## Test the Online Boutique website
