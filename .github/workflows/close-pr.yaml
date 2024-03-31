@@ -1,13 +1,10 @@
-name: frontend-close-pr
+name: close-pr
 on:
   pull_request:
-    paths:
-      - 'apps/frontend/**'
-      - '.github/workflows/frontend-close-pr.yaml'
     types:
       - closed
 env:
-  ENVIRONMENT_ID: pr-${{ github.event.number }}-frontend
+  ENVIRONMENT_ID: pr-${{ github.event.number }}
   HUMCTL_VERSION: '0.19.1'
 jobs:
   job:

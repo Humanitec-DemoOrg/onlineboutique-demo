@@ -1,17 +1,13 @@
-name: frontent-pr
+name: open-pr
 on:
   pull_request:
-    paths:
-      - 'apps/frontend/**'
-      - '.github/workflows/frontend-pr.yaml'
 permissions:
   contents: read
   pull-requests: write
 env:
-  WORKLOAD_FOLDER: 'apps/frontend/'
   BASE_ENVIRONMENT: 'development'
   ENVIRONMENT_TYPE: 'development'
-  ENVIRONMENT_ID: pr-${{ github.event.number }}-frontend
+  ENVIRONMENT_ID: pr-${{ github.event.number }}
   ENVIRONMENT_NAME: PR-${{ github.event.number }}
   HUMCTL_VERSION: '0.19.1'
 jobs:
