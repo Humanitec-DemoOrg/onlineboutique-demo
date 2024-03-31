@@ -62,7 +62,7 @@ jobs:
                       --app ${{ vars.APP_NAME }} \
                       --env ${{ env.ENVIRONMENT_ID }} -o json \
                       | jq -r '. | map(. | select(.metadata.type == "dns")) | map((.metadata.res_id | split(".") | .[1]) + ": [" + .status.resource.host + "](https://" + .status.resource.host + ")") | join("\n")')
-          
+
           DEPLOYMENT_ERRORS=$(humctl get deployment-error \
               --token ${{ secrets.HUMANITEC_TOKEN }} \
               --org ${{ secrets.HUMANITEC_ORG }} \
