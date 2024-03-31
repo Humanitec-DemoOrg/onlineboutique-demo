@@ -105,9 +105,9 @@ humctl score deploy \
 Get the public DNS exposing the `frontend` Workload:
 ```bash
 humctl get active-resources \
-    --app ${ONLINEBOUTIQUE_APP} \
-    --env ${ENVIRONMENT} \
-    -o json \
-    | jq -c '.[] | select(.metadata.type | contains("dns"))' \
-    | jq -r .status.resource.host
+	--app ${ONLINEBOUTIQUE_APP} \
+	--env ${ENVIRONMENT} \
+	-o json \
+	| jq -c '.[] | select(.metadata.type | contains("dns"))' \
+	| jq -r .status.resource.host
 ```
