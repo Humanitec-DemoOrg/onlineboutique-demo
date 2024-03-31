@@ -10,19 +10,17 @@ jobs:
         apps: ["cartservice", "checkoutservice", "currencyservice", "emailservice", "frontend", "loadgenerator", "paymentservice", "productcatalogservice", "recommendationservice", "shippingservice"]
     runs-on: ubuntu-22.04
     env:
-      SCORE_HUMANITEC_VERSION: 'latest'
+      HUMCTL_VERSION: '0.19.1'
     steps:
       - name: checkout code
         uses: actions/checkout@v3
-      - name: install score-humanitec
-        uses: score-spec/setup-score@v2
+      - name: install humctl
+        uses: humanitec/setup-cli-action@v1
         with:
-          file: score-humanitec
-          token: ${{ secrets.GITHUB_TOKEN }}
-          version: ${{ env.SCORE_HUMANITEC_VERSION }}
-      - name: score-humanitec run
+          version: ${{ env.HUMCTL_VERSION }}
+      - name: humctl score validate
         run: |
-          score-humanitec run \
-              --env development \
-              -f apps/${{ matrix.apps }}/score.yaml \
-              --extensions apps/${{ matrix.apps }}/humanitec.score.yaml
+          humctl score validate apps/${{ matrix.apps }}/score.yaml \
+              --token ${{ secrets.HUMANITEC_TOKEN }} \
+              --org ${{ secrets.HUMANITEC_ORG }} \
+              --strict
