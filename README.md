@@ -77,6 +77,7 @@ As Developer, in Humanitec.
 ### All in once
 
 ```bash
+HUMANITEC_CLI_ALPHA_FEATURES=score-deploy
 humctl score deploy \
 	--app ${ONLINEBOUTIQUE_APP} \
 	--env ${ENVIRONMENT} \
@@ -90,6 +91,7 @@ humctl score deploy \
 
 ```bash
 WORKLOAD=adservice #cartservice checkoutservice currencyservice emailservice frontend loadgenerator paymentservice productcatalogservice recommendationservice shippingservice
+HUMANITEC_CLI_ALPHA_FEATURES=score-deploy
 humctl score deploy \
 	--app ${ONLINEBOUTIQUE_APP} \
 	--env ${ENVIRONMENT} \
