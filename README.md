@@ -44,7 +44,6 @@ flowchart LR
 ```bash
 export HUMANITEC_TOKEN=FIXME
 export HUMANITEC_ORG=FIXME
-export HUMANITEC_CONTEXT=/orgs/${HUMANITEC_ORG}
 ```
 
 ## Create the Online Boutique App
@@ -80,8 +79,6 @@ As Developer, in Humanitec.
 HUMANITEC_CLI_ALPHA_FEATURES=score-deploy humctl score deploy \
 	--app ${ONLINEBOUTIQUE_APP} \
 	--env ${ENVIRONMENT} \
-	--org ${HUMANITEC_ORG} \
-	--token ${HUMANITEC_TOKEN} \
 	--deploy-config apps/score.deploy.yaml \
 	--wait
 ```
@@ -93,8 +90,6 @@ WORKLOAD=adservice #cartservice checkoutservice currencyservice emailservice fro
 HUMANITEC_CLI_ALPHA_FEATURES=score-deploy humctl score deploy \
 	--app ${ONLINEBOUTIQUE_APP} \
 	--env ${ENVIRONMENT} \
-	--org ${HUMANITEC_ORG} \
-	--token ${HUMANITEC_TOKEN} \
 	-f apps/${WORKLOAD}/score.yaml \
 	--extensions apps/${WORKLOAD}/humanitec.score.yaml \
 	--wait
