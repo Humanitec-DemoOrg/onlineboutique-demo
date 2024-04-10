@@ -72,5 +72,8 @@ entity:
         outputs: |
           host: {{ .init.name }}
           port: {{ .init.port }}
+        secrets: |
+          username: ""
+          password: ""
   criteria:
     - {}
