@@ -10,10 +10,10 @@ entity:
     values:
       templates:
         init: |-
-          name: redis
+          name: redis-{{ randAlpha 5 | lower}}
           port: 6379
         manifests: |-
-          deployment.yaml:
+          {{ .resource.id }}-deployment.yaml:
             location: namespace
             data:
               apiVersion: apps/v1
@@ -55,7 +55,7 @@ entity:
                     volumes:
                     - name: redis-data
                       emptyDir: {}
-          service.yaml:
+          {{ .resource.id }}-service.yaml:
             location: namespace
             data:
               apiVersion: v1
