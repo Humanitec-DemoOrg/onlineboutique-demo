@@ -54,7 +54,7 @@ resources:
     params:
       host: ${resources.dns.host}
       path: /
-      port: 80
+      port: 8080
   paymentservice:
     type: service
   productcatalogservice:
@@ -66,5 +66,5 @@ resources:
 service:
   ports:
     http:
-      port: 80
+      port: 8080
       targetPort: 8080

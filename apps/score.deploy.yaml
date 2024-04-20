@@ -19,9 +19,6 @@ workloads:
   - name: onlineboutique/frontend
     specFile: ./frontend/score.yaml
     extensionsFile: ./frontend/humanitec.score.yaml
-  - name: onlineboutique/loadgenerator
-    specFile: ./loadgenerator/score.yaml
-    extensionsFile: ./loadgenerator/humanitec.score.yaml
   - name: onlineboutique/paymentservice
     specFile: ./paymentservice/score.yaml
     extensionsFile: ./paymentservice/humanitec.score.yaml
