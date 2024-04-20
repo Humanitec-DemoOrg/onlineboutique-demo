@@ -1,18 +1,5 @@
 ## Create dynamically a new Memorystore (Redis) instance
 
-The goal is to define the connection to your Memorystore (Redis) instance from Humanitec for a dedicated `dev-gcp` Environment. We will provide below the basic requirements that your Memorystore (Redis) instance should meet.
-
-You need to [define your GKE cluster in Humanitec](byo-gke.md) first.
-
-We are defining this use case for the Staging Environment:
-```bash
-ENVIRONMENT=staging
-
-humctl create environment-type ${ENVIRONMENT}
-```
-
-As Platform Engineer, in Google Cloud.
-
 Create the GSA to provision the Terraform resources from Humanitec:
 ```bash
 SA_NAME=humanitec-terraform
@@ -26,17 +13,15 @@ gcloud iam service-accounts keys create ${SA_NAME}.json \
     --iam-account ${SA_ID}
 ```
 
-As Platform Engineer, in Humanitec, for Production Environment.
-
 Create the associated resource definition in Humanitec:
 ```bash
-cat <<EOF > memorystore-new.yaml
+cat <<EOF > redis-memorystore-dynamic.yaml
 apiVersion: entity.humanitec.io/v1b1
 kind: Definition
 metadata:
-  id: memorystore-new
+  id: redis-memorystore-dynamic
 entity:
-  name: memorystore-new
+  name: redis-memorystore-dynamic
   type: redis
   driver_type: ${HUMANITEC_ORG}/terraform
   driver_inputs:
@@ -54,34 +39,10 @@ entity:
       variables:
         credentials: $(cat ${SA_NAME}.json | jq -r tostring)
   criteria:
-    - env_id: ${ENVIRONMENT}
+    - app_id: ${HUMANITEC_APPLICATION}
+      env_id: ${HUMANITEC_ENVIRONMENT}
 humctl create \
-    -f memorystore-new.yaml
+    -f redis-memorystore-dynamic.yaml
 ```
 
-Now we need to apply all these resources definitions by deploying the Workloads in a new dedicated Environment.
-
-Create the new dedicatd Environment by cloning the existing `development` Environment from its latest Deployment:
-```bash
-humctl create environment ${ENVIRONMENT} \
-    --name ${ENVIRONMENT} \
-    -t ${ENVIRONMENT} \
-    --app ${ONLINEBOUTIQUE_APP} \
-    --from development
-```
-
-Deploy this new Environment:
-```bash
-humctl deploy env development ${ENVIRONMENT} \
-    --app ${ONLINEBOUTIQUE_APP}
-```
-
-Get the public DNS exposing the `frontend` Workload to test it:
-```bash
-humctl get active-resources \
-	--app ${ONLINEBOUTIQUE_APP} \
-  --env ${ENVIRONMENT} \
-	-o json \
-	| jq -c '.[] | select(.metadata.type | contains("dns"))' \
-	| jq -r .status.resource.host
-```
+You can now redeploy your `cartservice` Workload to use this dynamic Memorystore (Redis) database.
