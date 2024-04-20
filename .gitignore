@@ -1,1 +1,3 @@
-.vscode/settings.json
+.score-compose/*
+!.score-compose/00-service.provisioners.yaml
+compose.yaml

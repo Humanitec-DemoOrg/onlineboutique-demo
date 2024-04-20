@@ -1,0 +1,7 @@
+- uri: template://service-provisioners/static-service
+  type: service
+  init: |
+    name: {{ splitList "." .Id | last }}
+  outputs: |
+    {{ $w := (index .WorkloadServices .Init.name) }}
+    name: {{ $w.ServiceName | quote }}
