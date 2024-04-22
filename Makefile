@@ -23,7 +23,7 @@ compose.yaml:
 		apps/frontend/score.yaml \
 		apps/paymentservice/score.yaml \
 		apps/productcatalogservice/score.yaml \
-		apps/recommendationservice/score.yaml
+		apps/recommendationservice/score.yaml \
 		apps/shippingservice/score.yaml
 
 ## Generate a compose.yaml file from the score specs and launch it.
