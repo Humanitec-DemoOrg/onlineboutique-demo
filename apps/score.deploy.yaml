@@ -1,33 +1,23 @@
 apiVersion: config.humanitec.io/v1b1
 kind: ScoreDeployConfig
 workloads:
-  - name: onlineboutique/adservice
-    specFile: ./adservice/score.yaml
+  - specFile: ./adservice/score.yaml
     extensionsFile: ./adservice/humanitec.score.yaml
-  - name: onlineboutique/cartservice
-    specFile: ./cartservice/score.yaml
+  - specFile: ./cartservice/score.yaml
     extensionsFile: ./cartservice/humanitec.score.yaml
-  - name: onlineboutique/checkoutservice
-    specFile: ./checkoutservice/score.yaml
+  - specFile: ./checkoutservice/score.yaml
     extensionsFile: ./checkoutservice/humanitec.score.yaml
-  - name: onlineboutique/currencyservice
-    specFile: ./currencyservice/score.yaml
+  - specFile: ./currencyservice/score.yaml
     extensionsFile: ./currencyservice/humanitec.score.yaml
-  - name: onlineboutique/emailservice
-    specFile: ./emailservice/score.yaml
+  - specFile: ./emailservice/score.yaml
     extensionsFile: ./emailservice/humanitec.score.yaml
-  - name: onlineboutique/frontend
-    specFile: ./frontend/score.yaml
+  - specFile: ./frontend/score.yaml
     extensionsFile: ./frontend/humanitec.score.yaml
-  - name: onlineboutique/paymentservice
-    specFile: ./paymentservice/score.yaml
+  - specFile: ./paymentservice/score.yaml
     extensionsFile: ./paymentservice/humanitec.score.yaml
-  - name: onlineboutique/productcatalogservice
-    specFile: ./productcatalogservice/score.yaml
+  - specFile: ./productcatalogservice/score.yaml
     extensionsFile: ./productcatalogservice/humanitec.score.yaml
-  - name: onlineboutique/recommendationservice
-    specFile: ./recommendationservice/score.yaml
+  - specFile: ./recommendationservice/score.yaml
     extensionsFile: ./recommendationservice/humanitec.score.yaml
-  - name: onlineboutique/shippingservice
-    specFile: ./shippingservice/score.yaml
+  - specFile: ./shippingservice/score.yaml
     extensionsFile: ./shippingservice/humanitec.score.yaml
