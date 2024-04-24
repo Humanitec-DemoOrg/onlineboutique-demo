@@ -13,6 +13,11 @@ Deploy locally:
 make compose-up
 ```
 
+Get the generated DNS once the deployment is done:
+```bash
+score-compose resources get-outputs dns.default#frontend.dns --format '{{ .host }}:8080'
+```
+
 ## Humanitec deployment
 
 You will need to [install `humctl`](https://developer.humanitec.com/platform-orchestrator/cli/) locally.
@@ -34,7 +39,7 @@ humctl apply \
 make humanitec-deploy
 ```
 
-Get the generated DNS one the deployment is done:
+Get the generated DNS once the deployment is done:
 ```bash
 humctl get active-resources \
     --app ${HUMANITEC_APPLICATION} \
