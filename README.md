@@ -6,8 +6,6 @@ Get the [GoogleCloudPlatform/microservices-demo](https://github.com/GoogleCloudP
 
 You will need to [install `score-compose`](https://docs.score.dev/docs/score-implementation/score-compose/) locally.
 
-_Note: there is a current issue in `score-compose` not supporting yet the `service` resources. [Coming soon](https://github.com/score-spec/score-compose/issues/118)._
-
 Deploy locally:
 ```bash
 make compose-up
