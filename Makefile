@@ -11,7 +11,7 @@ help:
 .PHONY: .FORCE
 .FORCE:
 
-compose.yaml:
+compose.yaml: apps/adservice/score.yaml apps/cartservice/score.yaml apps/checkoutservice/score.yaml apps/currencyservice/score.yaml apps/emailservice/score.yaml apps/frontend/score.yaml apps/paymentservice/score.yaml apps/productcatalogservice/score.yaml apps/recommendationservice/score.yaml apps/shippingservice/score.yaml
 	score-compose init \
 		--no-sample
 	score-compose generate \

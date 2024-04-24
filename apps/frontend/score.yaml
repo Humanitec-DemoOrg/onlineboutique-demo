@@ -3,7 +3,7 @@ metadata:
   name: frontend
 containers:
   frontend:
-    image: gcr.io/google-samples/microservices-demo/frontend:v0.9.0
+    image: gcr.io/google-samples/microservices-demo/frontend:v0.10.0
     livenessProbe:
       httpGet:
         path: /_healthz
@@ -29,8 +29,10 @@ containers:
       PRODUCT_CATALOG_SERVICE_ADDR: "${resources.productcatalogservice.name}:3550"
       RECOMMENDATION_SERVICE_ADDR: "${resources.recommendationservice.name}:8080"
       SHIPPING_SERVICE_ADDR: "${resources.shippingservice.name}:50051"
+      SHOPPING_ASSISTANT_SERVICE_ADDR: "not-used-yet:8080"
       CYMBAL_BRANDING: "false"
       FRONTEND_MESSAGE: ""
+      ENABLE_ASSISTANT: "false"
     resources:
       limits:
         memory: "128Mi"
