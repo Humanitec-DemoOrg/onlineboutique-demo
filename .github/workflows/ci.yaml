@@ -11,7 +11,7 @@ jobs:
         apps: ["cartservice", "checkoutservice", "currencyservice", "emailservice", "frontend", "loadgenerator", "paymentservice", "productcatalogservice", "recommendationservice", "shippingservice"]
     runs-on: ubuntu-22.04
     env:
-      HUMCTL_VERSION: '0.22.0'
+      HUMCTL_VERSION: '0.23.1'
     steps:
       - name: checkout code
         uses: actions/checkout@v3
@@ -23,7 +23,8 @@ jobs:
         run: |
           humctl score validate apps/${{ matrix.apps }}/score.yaml \
               --token ${{ secrets.HUMANITEC_TOKEN }} \
-              --org ${{ secrets.HUMANITEC_ORG }}
+              --org ${{ secrets.HUMANITEC_ORG }} \
+              --strict
   score-compose:
     runs-on: ubuntu-22.04
     env:

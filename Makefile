@@ -48,4 +48,5 @@ humanitec-deploy:
 	humctl score deploy \
 		--deploy-config apps/score.deploy.yaml \
 		--env ${HUMANITEC_ENVIRONMENT} \
-		--app ${HUMANITEC_APPLICATION}
+		--app ${HUMANITEC_APPLICATION} \
+		--wait

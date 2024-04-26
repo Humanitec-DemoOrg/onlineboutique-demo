@@ -7,7 +7,7 @@ on:
       - 'v*'
 env:
   ENVIRONMENT_ID: development
-  HUMCTL_VERSION: '0.22.0'
+  HUMCTL_VERSION: '0.23.1'
 jobs:
   deploy-humanitec:
     runs-on: ubuntu-22.04
@@ -26,7 +26,7 @@ jobs:
               || true
       - name: humctl score deploy
         run: |
-          HUMANITEC_CLI_ALPHA_FEATURES=score-deploy humctl score deploy \
+          humctl score deploy \
               --deploy-config apps/score.deploy.yaml \
               --message ${{ github.ref_name }} \
               --workload-source-url-prefix "https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/apps" \
