@@ -1,5 +1,7 @@
 Get the [GoogleCloudPlatform/microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo) to Score and Humanitec.
 
+This repository has been illustrated with this blog post: [Platform Engineering in action: Deploy the Online Boutique sample apps with Score and Humanitec](https://medium.com/p/d99101001e69).
+
 ![](https://github.com/GoogleCloudPlatform/microservices-demo/raw/main/docs/img/architecture-diagram.png)
 
 ## Local deployment
