@@ -8,7 +8,7 @@ jobs:
   score-validate:
     strategy:
       matrix:
-        apps: ["cartservice", "checkoutservice", "currencyservice", "emailservice", "frontend", "loadgenerator", "paymentservice", "productcatalogservice", "recommendationservice", "shippingservice"]
+        apps: ["cart", "checkout", "currency", "email", "frontend", "loadgenerator", "payment", "productcatalog", "recommendation", "shipping"]
     runs-on: ubuntu-22.04
     env:
       HUMCTL_VERSION: '0.23.1'

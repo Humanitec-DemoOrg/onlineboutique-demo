@@ -11,20 +11,20 @@ help:
 .PHONY: .FORCE
 .FORCE:
 
-compose.yaml: apps/adservice/score.yaml apps/cartservice/score.yaml apps/checkoutservice/score.yaml apps/currencyservice/score.yaml apps/emailservice/score.yaml apps/frontend/score.yaml apps/paymentservice/score.yaml apps/productcatalogservice/score.yaml apps/recommendationservice/score.yaml apps/shippingservice/score.yaml
+compose.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml apps/currency/score.yaml apps/email/score.yaml apps/frontend/score.yaml apps/payment/score.yaml apps/productcatalog/score.yaml apps/recommendation/score.yaml apps/shipping/score.yaml
 	score-compose init \
 		--no-sample
 	score-compose generate \
-		apps/adservice/score.yaml \
-		apps/cartservice/score.yaml \
-		apps/checkoutservice/score.yaml \
-		apps/currencyservice/score.yaml \
-		apps/emailservice/score.yaml \
+		apps/ad/score.yaml \
+		apps/cart/score.yaml \
+		apps/checkout/score.yaml \
+		apps/currency/score.yaml \
+		apps/email/score.yaml \
 		apps/frontend/score.yaml \
-		apps/paymentservice/score.yaml \
-		apps/productcatalogservice/score.yaml \
-		apps/recommendationservice/score.yaml \
-		apps/shippingservice/score.yaml
+		apps/payment/score.yaml \
+		apps/productcatalog/score.yaml \
+		apps/recommendation/score.yaml \
+		apps/shipping/score.yaml
 
 ## Generate a compose.yaml file from the score specs and launch it.
 .PHONY: compose-up
