@@ -3,7 +3,7 @@ metadata:
   name: paymentservice
 containers:
   paymentservice:
-    image: gcr.io/google-samples/microservices-demo/paymentservice:v0.10.0
+    image: gcr.io/online-boutique-ci/refs/pull/2538/paymentservice:2538
     variables:
       DISABLE_PROFILER: "1"
       PORT: "50051"

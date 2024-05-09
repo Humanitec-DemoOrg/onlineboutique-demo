@@ -3,7 +3,7 @@ metadata:
   name: currencyservice
 containers:
   currencyservice:
-    image: gcr.io/google-samples/microservices-demo/currencyservice:v0.10.0
+    image: gcr.io/online-boutique-ci/refs/pull/2538/currencyservice:2538
     variables:
       DISABLE_PROFILER: "1"
       PORT: "7000"
