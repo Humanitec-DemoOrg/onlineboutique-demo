@@ -33,7 +33,7 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v4
       - name: install score-compose
-        uses: score-spec/setup-score@v2
+        uses: score-spec/setup-score@v3
         with:
           file: score-compose
           token: ${{ secrets.GITHUB_TOKEN }}
