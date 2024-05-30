@@ -35,7 +35,7 @@ jobs:
           humctl score deploy \
               --deploy-config apps/score.deploy.yaml \
               --image ${{ env.IMAGE_NAME }}@${IMAGE_DIGEST} \
-              --message "$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.commits_url }}?per_page=10" | jq -r .[-1].commit.message)" \
+              --message "$(git show -s --format=%s)" \
               --workload-source-url-prefix "https://github.com/${{ github.repository }}/blob/${{ github.head_ref }}/apps" \
               --token ${{ secrets.HUMANITEC_TOKEN }} \
               --org ${{ secrets.HUMANITEC_ORG }} \
@@ -135,6 +135,7 @@ jobs:
             echo "<details><summary>Resources Graph</summary>" >> pr_message.txt
             echo "" >> pr_message.txt
             echo "### Resources Graph:" >> pr_message.txt
+            echo "Use a [Graphviz](https://graphviz.org) viewer for a visual representation." >> pr_message.txt
             echo '```none' >> pr_message.txt
             echo "" >> pr_message.txt
             humctl resources graph \
