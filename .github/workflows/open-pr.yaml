@@ -9,7 +9,7 @@ env:
   ENVIRONMENT_TYPE: 'development'
   ENVIRONMENT_ID: pr-${{ github.event.number }}
   ENVIRONMENT_NAME: PR-${{ github.event.number }}
-  HUMCTL_VERSION: '0.23.2'
+  HUMCTL_VERSION: '0.24.0'
 jobs:
   job:
     runs-on: ubuntu-latest
