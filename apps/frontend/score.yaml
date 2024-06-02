@@ -38,8 +38,8 @@ containers:
         memory: "128Mi"
         cpu: "200m"
       requests:
-        memory: "64Mi"
-        cpu: "100m"
+        memory: "40Mi"
+        cpu: "40m"
 resources:
   adservice:
     type: service

@@ -9,11 +9,11 @@ containers:
       USERS: "10"
     resources:
       limits:
-        memory: "512Mi"
-        cpu: "500m"
+        memory: "220Mi"
+        cpu: "30m"
       requests:
-        memory: "256Mi"
-        cpu: "300m"
+        memory: "200Mi"
+        cpu: "10m"
 resources:
   frontend:
     type: service

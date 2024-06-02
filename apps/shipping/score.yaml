@@ -9,11 +9,11 @@ containers:
       PORT: "50051"
     resources:
       limits:
-        memory: "128Mi"
-        cpu: "200m"
+        memory: "30Mi"
+        cpu: "30m"
       requests:
-        memory: "64Mi"
-        cpu: "100m"
+        memory: "10Mi"
+        cpu: "10m"
 service:
   ports:
     grpc:
