@@ -8,10 +8,10 @@ containers:
       REDIS_ADDR: "${resources.redis-cart.host}:${resources.redis-cart.port},user=${resources.redis-cart.username},password=${resources.redis-cart.password}"
     resources:
       limits:
-        memory: "128Mi"
-        cpu: "300m"
+        memory: "90Mi"
+        cpu: "220m"
       requests:
-        memory: "64Mi"
+        memory: "70Mi"
         cpu: "200m"
 resources:
   redis-cart:

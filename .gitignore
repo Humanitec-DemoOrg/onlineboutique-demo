@@ -1,3 +1,6 @@
 .score-compose/*
 !.score-compose/00-service.provisioners.yaml
 compose.yaml
+.score-k8s/*
+!.score-k8s/00-service.provisioners.yaml
+manifests.yaml

@@ -11,9 +11,11 @@ help:
 .PHONY: .FORCE
 .FORCE:
 
-compose.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml apps/currency/score.yaml apps/email/score.yaml apps/frontend/score.yaml apps/payment/score.yaml apps/productcatalog/score.yaml apps/recommendation/score.yaml apps/shipping/score.yaml
+.score-compose/state.yaml:
 	score-compose init \
 		--no-sample
+
+compose.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml apps/currency/score.yaml apps/email/score.yaml apps/frontend/score.yaml apps/loadgenerator/score.yaml apps/payment/score.yaml apps/productcatalog/score.yaml apps/recommendation/score.yaml apps/shipping/score.yaml .score-compose/state.yaml Makefile
 	score-compose generate \
 		apps/ad/score.yaml \
 		apps/cart/score.yaml \
@@ -21,6 +23,7 @@ compose.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml a
 		apps/currency/score.yaml \
 		apps/email/score.yaml \
 		apps/frontend/score.yaml \
+		apps/loadgenerator/score.yaml \
 		apps/payment/score.yaml \
 		apps/productcatalog/score.yaml \
 		apps/recommendation/score.yaml \
@@ -41,6 +44,50 @@ compose-test: compose-up
 .PHONY: compose-down
 compose-down:
 	docker compose down -v --remove-orphans || true
+
+.score-k8s/state.yaml:
+	score-k8s init \
+		--no-sample
+
+manifests.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml apps/currency/score.yaml apps/email/score.yaml apps/frontend/score.yaml apps/loadgenerator/score.yaml apps/payment/score.yaml apps/productcatalog/score.yaml apps/recommendation/score.yaml apps/shipping/score.yaml .score-k8s/state.yaml Makefile
+	score-k8s generate \
+		apps/ad/score.yaml \
+		apps/cart/score.yaml \
+		apps/checkout/score.yaml \
+		apps/currency/score.yaml \
+		apps/email/score.yaml \
+		apps/frontend/score.yaml \
+		apps/loadgenerator/score.yaml \
+		apps/payment/score.yaml \
+		apps/productcatalog/score.yaml \
+		apps/recommendation/score.yaml \
+		apps/shipping/score.yaml
+
+NAMESPACE ?= default
+## Generate a manifests.yaml file from the score spec and apply it in Kubernetes.
+.PHONY: k8s-up
+k8s-up: manifests.yaml
+	$(MAKE) compose-down || true
+	kubectl apply \
+		-f manifests.yaml \
+		-n ${NAMESPACE}
+
+## Expose the container deployed in Kubernetes via port-forward.
+.PHONY: k8s-test
+k8s-test: k8s-up
+	kubectl wait pods \
+		-n ${NAMESPACE} \
+		-l score-workload=frontend \
+		--for condition=Ready \
+		--timeout=90s
+	kubectl -n nginx-gateway port-forward service/ngf-nginx-gateway-fabric 8080:80
+
+## Delete the deployment of the local container in Kubernetes.
+.PHONY: k8s-down
+k8s-down:
+	kubectl delete \
+		-f manifests.yaml \
+		-n ${NAMESPACE}
 
 ## Deploy the workloads to Humanitec.
 .PHONY: humanitec-deploy
