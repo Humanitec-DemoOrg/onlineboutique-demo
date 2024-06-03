@@ -9,10 +9,10 @@ containers:
       PORT: "7000"
     resources:
       limits:
-        memory: "60Mi"
+        memory: "90Mi"
         cpu: "40m"
       requests:
-        memory: "40Mi"
+        memory: "70Mi"
         cpu: "20m"
 service:
   ports:
