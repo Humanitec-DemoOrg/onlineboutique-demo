@@ -8,11 +8,11 @@ containers:
       PORT: "9555"
     resources:
       limits:
-        memory: "100Mi"
-        cpu: "80m"
+        memory: "150Mi"
+        cpu: "280m"
       requests:
-        memory: "80Mi"
-        cpu: "60m"
+        memory: "120Mi"
+        cpu: "250m"
 service:
   ports:
     grpc:

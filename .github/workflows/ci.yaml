@@ -9,9 +9,9 @@ jobs:
     strategy:
       matrix:
         apps: ["cart", "checkout", "currency", "email", "frontend", "loadgenerator", "payment", "productcatalog", "recommendation", "shipping"]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
-      HUMCTL_VERSION: '0.24.0'
+      HUMCTL_VERSION: '0.25.0'
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
               --org ${{ secrets.HUMANITEC_ORG }} \
               --strict
   score-compose:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       SCORE_COMPOSE_VERSION: 'latest'
     steps:

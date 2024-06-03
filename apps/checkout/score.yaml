@@ -14,11 +14,11 @@ containers:
       SHIPPING_SERVICE_ADDR: "${resources.shippingservice.name}:50051"
     resources:
       limits:
-        memory: "40Mi"
-        cpu: "30m"
+        memory: "80Mi"
+        cpu: "60m"
       requests:
-        memory: "20Mi"
-        cpu: "10m"
+        memory: "60Mi"
+        cpu: "40m"
 resources:
   cartservice:
     type: service
