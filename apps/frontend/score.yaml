@@ -35,11 +35,11 @@ containers:
       ENABLE_ASSISTANT: "false"
     resources:
       limits:
-        memory: "128Mi"
-        cpu: "200m"
+        memory: "50Mi"
+        cpu: "50m"
       requests:
-        memory: "40Mi"
-        cpu: "40m"
+        memory: "30Mi"
+        cpu: "30m"
 resources:
   adservice:
     type: service

@@ -10,10 +10,10 @@ containers:
     resources:
       limits:
         memory: "220Mi"
-        cpu: "30m"
+        cpu: "100m"
       requests:
         memory: "200Mi"
-        cpu: "10m"
+        cpu: "80m"
 resources:
   frontend:
     type: service

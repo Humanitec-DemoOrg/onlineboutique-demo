@@ -9,10 +9,10 @@ containers:
     resources:
       limits:
         memory: "150Mi"
-        cpu: "150m"
+        cpu: "250m"
       requests:
         memory: "120Mi"
-        cpu: "120m"
+        cpu: "230m"
 service:
   ports:
     grpc:

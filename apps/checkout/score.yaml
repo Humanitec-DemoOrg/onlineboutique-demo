@@ -15,10 +15,10 @@ containers:
     resources:
       limits:
         memory: "80Mi"
-        cpu: "30m"
+        cpu: "60m"
       requests:
         memory: "60Mi"
-        cpu: "10m"
+        cpu: "40m"
 resources:
   cartservice:
     type: service
