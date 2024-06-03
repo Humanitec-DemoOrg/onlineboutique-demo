@@ -15,7 +15,7 @@ help:
 	score-compose init \
 		--no-sample
 
-compose.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml apps/currency/score.yaml apps/email/score.yaml apps/frontend/score.yaml apps/payment/score.yaml apps/productcatalog/score.yaml apps/recommendation/score.yaml apps/shipping/score.yaml .score-compose/state.yaml Makefile
+compose.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml apps/currency/score.yaml apps/email/score.yaml apps/frontend/score.yaml apps/loadgenerator/score.yaml apps/payment/score.yaml apps/productcatalog/score.yaml apps/recommendation/score.yaml apps/shipping/score.yaml .score-compose/state.yaml Makefile
 	score-compose generate \
 		apps/ad/score.yaml \
 		apps/cart/score.yaml \
@@ -23,6 +23,7 @@ compose.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml a
 		apps/currency/score.yaml \
 		apps/email/score.yaml \
 		apps/frontend/score.yaml \
+		apps/loadgenerator/score.yaml \
 		apps/payment/score.yaml \
 		apps/productcatalog/score.yaml \
 		apps/recommendation/score.yaml \
@@ -48,7 +49,7 @@ compose-down:
 	score-k8s init \
 		--no-sample
 
-manifests.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml apps/currency/score.yaml apps/email/score.yaml apps/frontend/score.yaml apps/payment/score.yaml apps/productcatalog/score.yaml apps/recommendation/score.yaml apps/shipping/score.yaml .score-k8s/state.yaml Makefile
+manifests.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml apps/currency/score.yaml apps/email/score.yaml apps/frontend/score.yaml apps/loadgenerator/score.yaml apps/payment/score.yaml apps/productcatalog/score.yaml apps/recommendation/score.yaml apps/shipping/score.yaml .score-k8s/state.yaml Makefile
 	score-k8s generate \
 		apps/ad/score.yaml \
 		apps/cart/score.yaml \
@@ -56,6 +57,7 @@ manifests.yaml: apps/ad/score.yaml apps/cart/score.yaml apps/checkout/score.yaml
 		apps/currency/score.yaml \
 		apps/email/score.yaml \
 		apps/frontend/score.yaml \
+		apps/loadgenerator/score.yaml \
 		apps/payment/score.yaml \
 		apps/productcatalog/score.yaml \
 		apps/recommendation/score.yaml \
@@ -75,7 +77,7 @@ k8s-up: manifests.yaml
 k8s-test: k8s-up
 	kubectl wait pods \
 		-n ${NAMESPACE} \
-		-l score-workload=${WORKLOAD_NAME} \
+		-l score-workload=frontend \
 		--for condition=Ready \
 		--timeout=90s
 	kubectl -n nginx-gateway port-forward service/ngf-nginx-gateway-fabric 8080:80
