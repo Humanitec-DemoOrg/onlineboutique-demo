@@ -77,7 +77,8 @@ k8s-up: manifests.yaml
 		-n ${NAMESPACE}
 	kubectl wait deployments/frontend \
 		-n ${NAMESPACE} \
-		--for condition=Available
+		--for condition=Available \
+		--timeout=90s
 	kubectl wait pods \
 		-n ${NAMESPACE} \
 		-l app.kubernetes.io/name=frontend \
