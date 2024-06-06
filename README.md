@@ -6,18 +6,26 @@ This repository has been illustrated with this blog post: [Platform Engineering 
 
 ![](https://github.com/GoogleCloudPlatform/microservices-demo/raw/main/docs/img/architecture-diagram.png)
 
-## Local deployment
+## Local deployment with Docker Compose
 
-You will need to [install `score-compose`](https://docs.score.dev/docs/score-implementation/score-compose/) locally.
-
-Deploy locally:
+Deploy and test locally with Docker compose:
 ```bash
 make compose-up
+
+make compose-test
 ```
 
-Get the generated DNS once the deployment is done:
+## Local deployment with Kind cluster
+
+Deploy and test locally with Kind cluster:
 ```bash
-score-compose resources get-outputs dns.default#frontend.dns --format '{{ .host }}:8080'
+make kind-create-cluster
+
+make kind-load-image
+
+make k8s-up
+
+make k8s-test
 ```
 
 ## Humanitec deployment
