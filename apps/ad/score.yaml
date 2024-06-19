@@ -3,7 +3,7 @@ metadata:
   name: adservice
 containers:
   adservice:
-    image: gcr.io/google-samples/microservices-demo/adservice:v0.10.0
+    image: gcr.io/online-boutique-ci/refs/pull/2598/adservice:2598
     variables:
       PORT: "9555"
     resources:
