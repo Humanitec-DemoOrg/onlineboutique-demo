@@ -11,7 +11,7 @@ jobs:
         apps: ["cart", "checkout", "currency", "email", "frontend", "loadgenerator", "payment", "productcatalog", "recommendation", "shipping"]
     runs-on: ubuntu-24.04
     env:
-      HUMCTL_VERSION: '0.25.0'
+      HUMCTL_VERSION: '*'
     steps:
       - name: checkout code
         uses: actions/checkout@v4
