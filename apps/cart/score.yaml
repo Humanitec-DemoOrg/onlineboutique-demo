@@ -3,7 +3,7 @@ metadata:
   name: cartservice
 containers:
   cartservice:
-    image: gcr.io/google-samples/microservices-demo/cartservice:v0.10.0
+    image: gcr.io/google-samples/microservices-demo/cartservice:v0.10.1
     variables:
       REDIS_ADDR: "${resources.redis-cart.host}:${resources.redis-cart.port},user=${resources.redis-cart.username},password=${resources.redis-cart.password}"
     resources:
