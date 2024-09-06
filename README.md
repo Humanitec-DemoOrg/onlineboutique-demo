@@ -21,8 +21,6 @@ Deploy and test locally with Kind cluster:
 ```bash
 make kind-create-cluster
 
-make kind-load-image
-
 make k8s-up
 
 make k8s-test
