@@ -22,9 +22,8 @@ jobs:
       - name: humctl score validate
         run: |
           humctl score validate apps/${{ matrix.apps }}/score.yaml \
-              --token ${{ secrets.HUMANITEC_TOKEN }} \
-              --org ${{ secrets.HUMANITEC_ORG }} \
-              --strict
+              --strict \
+              --local
   score-compose:
     runs-on: ubuntu-24.04
     env:
