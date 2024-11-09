@@ -3,7 +3,7 @@ metadata:
   name: frontend
 containers:
   frontend:
-    image: gcr.io/google-samples/microservices-demo/frontend:v0.10.1
+    image: gcr.io/google-samples/microservices-demo/frontend:v0.10.2
     livenessProbe:
       httpGet:
         path: /_healthz
