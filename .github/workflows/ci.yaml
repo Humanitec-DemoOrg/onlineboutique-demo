@@ -19,6 +19,7 @@ jobs:
         uses: humanitec/setup-cli-action@v1
         with:
           version: ${{ env.HUMCTL_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: humctl score validate
         run: |
           humctl score validate apps/${{ matrix.apps }}/score.yaml \
