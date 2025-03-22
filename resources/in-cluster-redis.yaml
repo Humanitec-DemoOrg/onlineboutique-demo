@@ -3,17 +3,31 @@ kind: Definition
 metadata:
   id: redis-in-cluster
 entity:
-  name: redis-in-cluster
-  type: redis
   driver_type: humanitec/template
+  type: redis
+  name: redis-in-cluster
   driver_inputs:
     values:
+      resId: ${context.res.id}
       templates:
+        cookie: |
+          port: {{ .init.port }}
+          name: {{ .init.name }}
         init: |-
-          name: redis-{{ randAlpha 5 | lower}}
+          {{- if .cookie }}
+          port: {{ .cookie.port }}
+          name: {{ .cookie.name }}
+          {{- else }}
           port: 6379
+          # Deployment names shouldn't be > 47 https://pauldally.medium.com/why-you-try-to-keep-your-deployment-names-to-47-characters-or-less-1f93a848d34c
+          {{ if regexMatch "modules\\.[a-z0-9-]+\\.externals" .driver.values.resId }}
+          name: redis-{{ index (splitList "." .driver.values.resId) 1 | substr 0 20 }}-{{ index (splitList "." .driver.values.resId) 3 | substr 0 20 }}
+          {{- else }}
+          name: redis-{{ index (splitList "." .driver.values.resId) 1 | substr 0 40 }}
+          {{- end }}
+          {{- end }}
         manifests: |-
-          {{ .resource.id }}-deployment.yaml:
+          deployment.yaml:
             location: namespace
             data:
               apiVersion: apps/v1
@@ -31,10 +45,10 @@ entity:
                   spec:
                     automountServiceAccountToken: false
                     securityContext:
-                      fsGroup: 1000
-                      runAsGroup: 1000
+                      fsGroup: 65532
+                      runAsGroup: 65532
                       runAsNonRoot: true
-                      runAsUser: 1000
+                      runAsUser: 65532
                       seccompProfile:
                         type: RuntimeDefault
                     containers:
@@ -46,16 +60,17 @@ entity:
                             - ALL
                         privileged: false
                         readOnlyRootFilesystem: true
-                      image: redis:alpine
+                      image: redis:7.2-alpine
                       ports:
-                      - containerPort: {{ .init.port }}
+                      - name: tcp-redis
+                        containerPort: {{ .init.port }}
                       volumeMounts:
                       - mountPath: /data
                         name: redis-data
                     volumes:
                     - name: redis-data
                       emptyDir: {}
-          {{ .resource.id }}-service.yaml:
+          service.yaml:
             location: namespace
             data:
               apiVersion: v1
@@ -69,12 +84,10 @@ entity:
                 ports:
                 - name: tcp-redis
                   port: {{ .init.port }}
-                  targetPort: {{ .init.port }}
-        outputs: |
+                  targetPort: tcp-redis
+        outputs: |-
           host: {{ .init.name }}
           port: {{ .init.port }}
-        secrets: |
+        secrets: |-
           username: ""
           password: ""
-  criteria:
-    - {}
