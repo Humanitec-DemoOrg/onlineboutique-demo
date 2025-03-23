@@ -91,3 +91,5 @@ entity:
         secrets: |-
           username: ""
           password: ""
+  criteria:
+    - {}
