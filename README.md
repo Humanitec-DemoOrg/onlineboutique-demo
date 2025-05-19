@@ -4,7 +4,27 @@ Get the [GoogleCloudPlatform/microservices-demo](https://github.com/GoogleCloudP
 
 This repository has been illustrated with this blog post: [Platform Engineering in action: Deploy the Online Boutique sample apps with Score and Humanitec](https://medium.com/p/d99101001e69).
 
-![](https://github.com/GoogleCloudPlatform/microservices-demo/raw/main/docs/img/architecture-diagram.png)
+```mermaid
+flowchart TD
+    dns[DNS] --> frontend(frontend)
+    subgraph Workloads
+        loadgenerator(loadgenerator)-->frontend
+        frontend-->recommendation(recommendation)
+        frontend-->ad(ad)
+        frontend-->shipping(shipping)
+        frontend-->currency(currency)
+        frontend-->checkout(checkout)
+        frontend-->cart(cart)
+        checkout-->cart
+        checkout-->payment(payment)
+        checkout-->email(email)
+        checkout-->currency
+        checkout-->productcatalog(productcatalog)
+        recommendation-->productcatalog
+        frontend-->productcatalog
+    end
+    cart-->redis[(Redis)]
+```
 
 ## Local deployment with Docker Compose
 
