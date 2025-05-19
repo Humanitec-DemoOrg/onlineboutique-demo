@@ -1,8 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
-  name: adservice
+  name: ad
 containers:
-  adservice:
+  ad:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/adservice:v0.10.2
     variables:
       PORT: "9555"

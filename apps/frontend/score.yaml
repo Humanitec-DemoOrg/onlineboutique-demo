@@ -19,16 +19,16 @@ containers:
         - name: Cookie
           value: shop_session-id=x-readiness-probe
     variables:
-      AD_SERVICE_ADDR: "${resources.adservice.name}:9555"
-      CART_SERVICE_ADDR: "${resources.cartservice.name}:7070"
-      CHECKOUT_SERVICE_ADDR: "${resources.checkoutservice.name}:5050"
-      CURRENCY_SERVICE_ADDR: "${resources.currencyservice.name}:7000"
+      AD_SERVICE_ADDR: "${resources.ad.name}:9555"
+      CART_SERVICE_ADDR: "${resources.cart.name}:7070"
+      CHECKOUT_SERVICE_ADDR: "${resources.checkout.name}:5050"
+      CURRENCY_SERVICE_ADDR: "${resources.currency.name}:7000"
       ENABLE_PROFILER: "0"
-      PAYMENT_SERVICE_ADDR: "${resources.paymentservice.name}:50051"
+      PAYMENT_SERVICE_ADDR: "${resources.payment.name}:50051"
       PORT: "8080"
-      PRODUCT_CATALOG_SERVICE_ADDR: "${resources.productcatalogservice.name}:3550"
-      RECOMMENDATION_SERVICE_ADDR: "${resources.recommendationservice.name}:8080"
-      SHIPPING_SERVICE_ADDR: "${resources.shippingservice.name}:50051"
+      PRODUCT_CATALOG_SERVICE_ADDR: "${resources.productcatalog.name}:3550"
+      RECOMMENDATION_SERVICE_ADDR: "${resources.recommendation.name}:8080"
+      SHIPPING_SERVICE_ADDR: "${resources.shipping.name}:50051"
       SHOPPING_ASSISTANT_SERVICE_ADDR: "not-used-yet:8080"
       CYMBAL_BRANDING: "false"
       FRONTEND_MESSAGE: ""
@@ -41,13 +41,13 @@ containers:
         memory: "30Mi"
         cpu: "30m"
 resources:
-  adservice:
+  ad:
     type: service
-  cartservice:
+  cart:
     type: service
-  checkoutservice:
+  checkout:
     type: service
-  currencyservice:
+  currency:
     type: service
   dns:
     type: dns
@@ -57,13 +57,13 @@ resources:
       host: ${resources.dns.host}
       path: /
       port: 8080
-  paymentservice:
+  payment:
     type: service
-  productcatalogservice:
+  productcatalog:
     type: service
-  recommendationservice:
+  recommendation:
     type: service
-  shippingservice:
+  shipping:
     type: service
 service:
   ports:

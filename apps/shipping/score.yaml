@@ -1,8 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
-  name: shippingservice
+  name: shipping
 containers:
-  shippingservice:
+  shipping:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/shippingservice:v0.10.2
     variables:
       DISABLE_PROFILER: "1"

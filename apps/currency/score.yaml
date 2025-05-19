@@ -1,8 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
-  name: currencyservice
+  name: currency
 containers:
-  currencyservice:
+  currency:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.2
     variables:
       DISABLE_PROFILER: "1"

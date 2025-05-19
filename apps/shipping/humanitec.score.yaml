@@ -2,7 +2,7 @@ apiVersion: humanitec.org/v1b1
 profile: humanitec/default-module
 spec:
   containers:
-    shippingservice:
+    shipping:
       liveness_probe:
         port: 50051
         type: grpc

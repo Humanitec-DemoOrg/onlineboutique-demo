@@ -1,17 +1,17 @@
 apiVersion: score.dev/v1b1
 metadata:
-  name: checkoutservice
+  name: checkout
 containers:
-  checkoutservice:
+  checkout:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/checkoutservice:v0.10.2
     variables:
-      CART_SERVICE_ADDR: "${resources.cartservice.name}:7070"
-      CURRENCY_SERVICE_ADDR: "${resources.currencyservice.name}:7000"
-      EMAIL_SERVICE_ADDR: "${resources.emailservice.name}:5000"
-      PAYMENT_SERVICE_ADDR: "${resources.paymentservice.name}:50051"
+      CART_SERVICE_ADDR: "${resources.cart.name}:7070"
+      CURRENCY_SERVICE_ADDR: "${resources.currency.name}:7000"
+      EMAIL_SERVICE_ADDR: "${resources.email.name}:5000"
+      PAYMENT_SERVICE_ADDR: "${resources.payment.name}:50051"
       PORT: "5050"
-      PRODUCT_CATALOG_SERVICE_ADDR: "${resources.productcatalogservice.name}:3550"
-      SHIPPING_SERVICE_ADDR: "${resources.shippingservice.name}:50051"
+      PRODUCT_CATALOG_SERVICE_ADDR: "${resources.productcatalog.name}:3550"
+      SHIPPING_SERVICE_ADDR: "${resources.shipping.name}:50051"
     resources:
       limits:
         memory: "80Mi"
@@ -20,17 +20,17 @@ containers:
         memory: "60Mi"
         cpu: "40m"
 resources:
-  cartservice:
+  cart:
     type: service
-  currencyservice:
+  currency:
     type: service
-  emailservice:
+  email:
     type: service
-  paymentservice:
+  payment:
     type: service
-  productcatalogservice:
+  productcatalog:
     type: service
-  shippingservice:
+  shipping:
     type: service
 service:
   ports:

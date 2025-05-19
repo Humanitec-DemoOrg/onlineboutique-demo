@@ -1,8 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
-  name: productcatalogservice
+  name: productcatalog
 containers:
-  productcatalogservice:
+  productcatalog:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/productcatalogservice:v0.10.2
     variables:
       DISABLE_PROFILER: "1"

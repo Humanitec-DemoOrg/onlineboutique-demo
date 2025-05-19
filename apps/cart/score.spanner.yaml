@@ -1,8 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
-  name: cartservice
+  name: cart
 containers:
-  cartservice:
+  cart:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice:v0.10.2
     variables:
       SPANNER_PROJECT: ${resources.carts.project}
