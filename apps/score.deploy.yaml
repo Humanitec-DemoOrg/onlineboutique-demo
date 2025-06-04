@@ -1,8 +1,8 @@
 apiVersion: config.humanitec.io/v1b1
 kind: ScoreDeployConfig
 workloads:
-  #- specFile: ./ad/score.yaml
-  #  extensionsFile: ./ad/humanitec.score.yaml
+  - specFile: ./ad/score.yaml
+    extensionsFile: ./ad/humanitec.score.yaml
   - specFile: ./cart/score.yaml
     extensionsFile: ./cart/humanitec.score.yaml
   - specFile: ./checkout/score.yaml
