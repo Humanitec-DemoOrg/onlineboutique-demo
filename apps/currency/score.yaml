@@ -3,7 +3,7 @@ metadata:
   name: currency
 containers:
   currency:
-    image: us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.2
+    image: us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.3
     variables:
       DISABLE_PROFILER: "1"
       PORT: "7000"

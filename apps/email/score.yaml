@@ -3,7 +3,7 @@ metadata:
   name: email
 containers:
   email:
-    image: us-central1-docker.pkg.dev/google-samples/microservices-demo/emailservice:v0.10.2
+    image: us-central1-docker.pkg.dev/google-samples/microservices-demo/emailservice:v0.10.3
     variables:
       DISABLE_PROFILER: "1"
       PORT: "8080"
