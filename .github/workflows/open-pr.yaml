@@ -20,6 +20,7 @@ jobs:
         uses: humanitec/setup-cli-action@v1
         with:
           version: ${{ env.HUMCTL_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: create humanitec env
         run: |
           humctl create environment ${{ env.ENVIRONMENT_ID }} \

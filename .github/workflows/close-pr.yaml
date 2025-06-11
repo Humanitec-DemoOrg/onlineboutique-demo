@@ -16,6 +16,7 @@ jobs:
         uses: humanitec/setup-cli-action@v1
         with:
           version: ${{ env.HUMCTL_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: delete humanitec env
         run: |
           humctl delete env ${{ env.ENVIRONMENT_ID }} \
