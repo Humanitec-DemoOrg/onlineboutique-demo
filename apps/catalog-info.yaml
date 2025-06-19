@@ -3,3 +3,4 @@ kind: System
 metadata:
   name: online-boutique
   description: Online Boutique project
+  owner: user:guest
