@@ -20,3 +20,13 @@ spec:
   system: online-boutique
   apiConsumedBy: ['component:frontend', 'component:checkoutservice']
   dependsOn: ['resource:redis-cart']
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: redis-cart
+  description: Redis database
+spec:
+  type: database
+  owner: user:guest
+  system: online-boutique
