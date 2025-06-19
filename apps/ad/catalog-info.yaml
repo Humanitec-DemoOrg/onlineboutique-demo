@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ad
+  description: Ad Service for Online Boutique
+  tags:
+    - java
+    - backend
+    - grpc
+  links:
+    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/adservice
+      title: Source code
+      icon: help
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:guest
+  system: online-boutique
+  apiConsumedBy: ['component:frontend']

@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: frontend
+  description: Frontend for Online Boutique
+  tags:
+    - golang
+    - html
+    - css
+    - ui 
+    - http
+  links:
+    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/frontend
+      title: Source code
+      icon: help
+spec:
+  type: website
+  lifecycle: experimental
+  owner: user:guest
+  system: online-boutique
+  dependsOn:
+  - 'component:ad'
+  - 'component:cart'
+  apiConsumedBy: ['resource:dns']
