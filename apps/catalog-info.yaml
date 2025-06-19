@@ -3,4 +3,7 @@ kind: System
 metadata:
   name: online-boutique
   description: Online Boutique project
+  annotations:
+    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+spec:
   owner: user:guest

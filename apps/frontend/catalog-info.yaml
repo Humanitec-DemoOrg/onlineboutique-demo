@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: frontend
   description: Frontend for Online Boutique
+  annotations:
+    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
   tags:
     - golang
     - html
