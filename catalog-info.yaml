@@ -160,8 +160,11 @@ spec:
   system: online-boutique
   dependsOn:
   - 'component:ad'
+  - 'component:shipping'
+  - 'component:checkout'
   - 'component:cart'
-  apiConsumedBy: ['resource:dns']
+  - 'component:recommendation'
+  - 'resource:dns'
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
