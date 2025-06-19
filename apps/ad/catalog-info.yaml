@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ad
-  description: Ad Service for Online Boutique
+  description: Ad Service
   annotations:
     github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
   tags:

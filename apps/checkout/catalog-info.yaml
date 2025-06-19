@@ -1,36 +1,27 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: frontend
-  description: Frontend
+  name: checkout
+  description: Checkout service
   annotations:
     github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
   tags:
     - golang
-    - html
-    - css
-    - ui
-    - http
+    - backend
+    - grpc
   links:
     - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/frontend
       title: Source code
       icon: help
 spec:
-  type: website
+  type: service
   lifecycle: experimental
   owner: user:guest
   system: online-boutique
+  apiConsumedBy: ['component:frontend']
   dependsOn:
-  - 'component:ad'
   - 'component:cart'
-  apiConsumedBy: ['resource:dns']
----
-apiVersion: backstage.io/v1alpha1
-kind: Resource
-metadata:
-  name: dns
-  description: DNS
-spec:
-  type: dns
-  owner: user:guest
-  system: online-boutique
+  - 'component:currency'
+  - 'component:payment'
+  - 'component:email'
+  - 'component:productcatalog'

@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: cart
-  description: Cart Service for Online Boutique
+  description: Cart Service
   annotations:
     github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
   tags:
