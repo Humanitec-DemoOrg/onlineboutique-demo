@@ -183,7 +183,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: Loadgenerator
+  name: loadgenerator
   description: Loadgenerator
   annotations:
     github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
