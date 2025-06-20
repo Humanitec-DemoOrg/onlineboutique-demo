@@ -22,7 +22,7 @@ metadata:
   links:
     - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/adservice
       title: Source code
-      icon: help
+      icon: github
 spec:
   type: service
   lifecycle: experimental
@@ -43,7 +43,7 @@ metadata:
   links:
     - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/cartservice
       title: Source code
-      icon: help
+      icon: github
 spec:
   type: service
   lifecycle: experimental
@@ -75,7 +75,7 @@ metadata:
   links:
     - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/frontend
       title: Source code
-      icon: help
+      icon: github
 spec:
   type: service
   lifecycle: experimental
@@ -102,7 +102,7 @@ metadata:
   links:
     - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/currencyservice
       title: Source code
-      icon: help
+      icon: github
 spec:
   type: service
   lifecycle: experimental
@@ -126,7 +126,7 @@ metadata:
   links:
     - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/emailservice
       title: Source code
-      icon: help
+      icon: github
 spec:
   type: service
   lifecycle: experimental
@@ -152,7 +152,7 @@ metadata:
   links:
     - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/frontend
       title: Source code
-      icon: help
+      icon: github
 spec:
   type: website
   lifecycle: experimental
@@ -175,3 +175,24 @@ spec:
   type: dns
   owner: user:guest
   system: online-boutique
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: loadgenerator
+  description: loadgenerator
+  annotations:
+    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+  tags:
+    - python
+  links:
+    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/loadgenerator
+      title: Source code
+      icon: github
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:guest
+  system: online-boutique
+  dependsOn:
+  - 'component:frontend'
