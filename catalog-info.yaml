@@ -24,6 +24,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-ad
+    tags:
+        - java
+        - backend
+        - grpc
     title: ad
 spec:
     lifecycle: experimental
@@ -42,6 +46,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-cart
+    tags:
+        - dotnet
+        - backend
+        - grpc
     title: cart
 spec:
     dependsOn:
@@ -62,6 +70,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-checkout
+    tags:
+        - golang
+        - backend
+        - grpc
     title: checkout
 spec:
     dependsOn:
@@ -87,6 +99,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-currency
+    tags:
+        - node
+        - backend
+        - grpc
     title: currency
 spec:
     lifecycle: experimental
@@ -105,6 +121,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-email
+    tags:
+        - python
+        - backend
+        - grpc
     title: email
 spec:
     lifecycle: experimental
@@ -123,6 +143,12 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-frontend
+    tags:
+        - golang
+        - html
+        - css
+        - ui
+        - http
     title: frontend
 spec:
     dependsOn:
@@ -151,6 +177,8 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-loadgenerator
+    tags:
+        - python
     title: loadgenerator
 spec:
     dependsOn:
@@ -171,6 +199,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-payment
+    tags:
+        - node
+        - backend
+        - grpc
     title: payment
 spec:
     lifecycle: experimental
@@ -189,6 +221,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-productcatalog
+    tags:
+        - golang
+        - backend
+        - grpc
     title: productcatalog
 spec:
     lifecycle: experimental
@@ -207,6 +243,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-recommendation
+    tags:
+        - golang
+        - backend
+        - grpc
     title: recommendation
 spec:
     dependsOn:
@@ -227,6 +267,10 @@ metadata:
           title: Repository
           url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
     name: online-boutique-shipping
+    tags:
+        - golang
+        - backend
+        - grpc
     title: shipping
 spec:
     lifecycle: experimental
