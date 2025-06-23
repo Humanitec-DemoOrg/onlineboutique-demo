@@ -1,6 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
   name: shipping
+  annotations:
+    tags: "golang,backend,grpc"
 containers:
   shipping:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/shippingservice:v0.10.3

@@ -1,6 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
   name: frontend
+  annotations:
+    tags: "golang,html,css,ui,http"
 containers:
   frontend:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/frontend:v0.10.3

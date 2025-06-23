@@ -1,6 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
   name: recommendation
+  annotations:
+    tags: "golang,backend,grpc"
 containers:
   recommendation:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/recommendationservice:v0.10.3

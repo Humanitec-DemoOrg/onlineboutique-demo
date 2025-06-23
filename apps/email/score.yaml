@@ -1,6 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
   name: email
+  annotations:
+    tags: "python,backend,grpc"
 containers:
   email:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/emailservice:v0.10.3
