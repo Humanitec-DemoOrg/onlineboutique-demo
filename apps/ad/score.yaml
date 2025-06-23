@@ -1,6 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
   name: ad
+  annotations:
+    tags: "java,backend,grpc"
 containers:
   adservice:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/adservice:v0.10.3

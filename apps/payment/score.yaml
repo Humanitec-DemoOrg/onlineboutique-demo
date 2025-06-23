@@ -1,6 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
   name: payment
+  annotations:
+    tags: "node,backend,grpc"
 containers:
   payment:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/paymentservice:v0.10.3

@@ -1,288 +1,301 @@
+---
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: online-boutique
-  description: Online Boutique project
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo
-      title: Repository
-      icon: github
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: online-boutique
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique
 spec:
-  owner: user:guest
+    owner: user:guest
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ad
-  description: Ad Service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - java
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/adservice
-      title: Source code
-      icon: github
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: ad
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-ad
+    tags:
+        - java
+        - backend
+        - grpc
+    title: ad
 spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: cart
-  description: Cart Service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - dotnet
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/cartservice
-      title: Source code
-      icon: github
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: cart
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-cart
+    tags:
+        - dotnet
+        - backend
+        - grpc
+    title: cart
 spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
-  dependsOn: ['resource:redis-cart']
+    dependsOn:
+        - resource:online-boutique-cart-redis-cart
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: checkout
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-checkout
+    tags:
+        - golang
+        - backend
+        - grpc
+    title: checkout
+spec:
+    dependsOn:
+        - component:online-boutique-cart
+        - component:online-boutique-currency
+        - component:online-boutique-email
+        - component:online-boutique-payment
+        - component:online-boutique-productcatalog
+        - component:online-boutique-shipping
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: currency
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-currency
+    tags:
+        - node
+        - backend
+        - grpc
+    title: currency
+spec:
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: email
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-email
+    tags:
+        - python
+        - backend
+        - grpc
+    title: email
+spec:
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: frontend
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-frontend
+    tags:
+        - golang
+        - html
+        - css
+        - ui
+        - http
+    title: frontend
+spec:
+    dependsOn:
+        - component:online-boutique-ad
+        - component:online-boutique-cart
+        - component:online-boutique-checkout
+        - component:online-boutique-currency
+        - resource:online-boutique-frontend-dns
+        - component:online-boutique-payment
+        - component:online-boutique-productcatalog
+        - component:online-boutique-recommendation
+        - component:online-boutique-shipping
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: loadgenerator
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-loadgenerator
+    tags:
+        - python
+    title: loadgenerator
+spec:
+    dependsOn:
+        - component:online-boutique-frontend
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: payment
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-payment
+    tags:
+        - node
+        - backend
+        - grpc
+    title: payment
+spec:
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: productcatalog
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-productcatalog
+    tags:
+        - golang
+        - backend
+        - grpc
+    title: productcatalog
+spec:
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: recommendation
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-recommendation
+    tags:
+        - golang
+        - backend
+        - grpc
+    title: recommendation
+spec:
+    dependsOn:
+        - component:online-boutique-productcatalog
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    annotations:
+        github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
+    description: shipping
+    links:
+        - icon: github
+          title: Repository
+          url: https://github.com/Humanitec-DemoOrg/onlineboutique-demo
+    name: online-boutique-shipping
+    tags:
+        - golang
+        - backend
+        - grpc
+    title: shipping
+spec:
+    lifecycle: experimental
+    owner: user:guest
+    system: online-boutique
+    type: service
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: redis-cart
-  description: Redis database
+    description: online-boutique-cart-redis-cart
+    name: online-boutique-cart-redis-cart
+    title: redis-cart
 spec:
-  type: database
-  owner: user:guest
-  system: online-boutique
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: checkout
-  description: Checkout service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - golang
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/frontend
-      title: Source code
-      icon: github
-spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
-  dependsOn:
-  - 'component:cart'
-  - 'component:currency'
-  - 'component:payment'
-  - 'component:email'
-  - 'component:productcatalog'
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: currency
-  description: Currency service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - node
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/currencyservice
-      title: Source code
-      icon: github
-spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
-  dependsOn:
-  - 'component:checkout'
-  - 'component:frontend'
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: email
-  description: Email service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - python
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/emailservice
-      title: Source code
-      icon: github
-spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
-  dependsOn:
-  - 'component:checkout'
-  - 'component:frontend'
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: frontend
-  description: Frontend
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - golang
-    - html
-    - css
-    - ui
-    - http
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/frontend
-      title: Source code
-      icon: github
-spec:
-  type: website
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
-  dependsOn:
-  - 'component:ad'
-  - 'component:shipping'
-  - 'component:checkout'
-  - 'component:cart'
-  - 'component:recommendation'
-  - 'resource:dns'
+    owner: user:guest
+    system: online-boutique
+    type: redis
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: dns
-  description: DNS
+    description: online-boutique-frontend-dns
+    name: online-boutique-frontend-dns
+    title: dns
 spec:
-  type: dns
-  owner: user:guest
-  system: online-boutique
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: loadgenerator
-  description: Loadgenerator
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - python
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/loadgenerator
-      title: Source code
-      icon: github
-spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
-  dependsOn:
-  - 'component:frontend'
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: payment
-  description: Payment Service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - node
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/paymentservice
-      title: Source code
-      icon: github
-spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: productcatalog
-  description: Product Catalog Service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - golang
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/productcatalogservice
-      title: Source code
-      icon: github
-spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: recommendation
-  description: Recommendation Service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - golang
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/recommendationservice
-      title: Source code
-      icon: github
-spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
-  dependsOn:
-  - 'component:productcatalog'
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: shipping
-  description: Shipping Service
-  annotations:
-    github.com/project-slug: Humanitec-DemoOrg/onlineboutique-demo
-  tags:
-    - golang
-    - backend
-    - grpc
-  links:
-    - url: https://github.com/GoogleCloudPlatform/microservices-demo/tree/main/src/shippingservice
-      title: Source code
-      icon: github
-spec:
-  type: service
-  lifecycle: experimental
-  owner: user:guest
-  system: online-boutique
+    owner: user:guest
+    system: online-boutique
+    type: dns

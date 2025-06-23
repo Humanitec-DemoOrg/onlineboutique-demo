@@ -1,6 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
   name: currency
+  annotations:
+    tags: "node,backend,grpc"
 containers:
   currency:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.3

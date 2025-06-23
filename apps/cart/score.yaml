@@ -1,6 +1,8 @@
 apiVersion: score.dev/v1b1
 metadata:
   name: cart
+  annotations:
+    tags: "dotnet,backend,grpc"
 containers:
   cart:
     image: us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice:v0.10.3
