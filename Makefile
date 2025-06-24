@@ -107,3 +107,27 @@ humanitec-deploy:
 		--env ${HUMANITEC_ENVIRONMENT} \
 		--app ${HUMANITEC_APPLICATION} \
 		--wait
+
+## Generate catalog-info.yaml for Backstage.
+.PHONY: generate-catalog-info
+generate-catalog-info:
+	score-k8s init \
+		--no-sample \
+		--provisioners https://raw.githubusercontent.com/score-spec/community-provisioners/refs/heads/main/service/score-k8s/10-service.provisioners.yaml \
+		--patch-templates https://raw.githubusercontent.com/score-spec/community-patchers/refs/heads/main/score-k8s/backstage-catalog-entities.tpl
+	score-k8s generate \
+		--namespace traderx-demo \
+		--generate-namespace \
+		apps/ad/score.yaml \
+		apps/cart/score.yaml \
+		apps/checkout/score.yaml \
+		apps/currency/score.yaml \
+		apps/email/score.yaml \
+		apps/frontend/score.yaml \
+		apps/loadgenerator/score.yaml \
+		apps/payment/score.yaml \
+		apps/productcatalog/score.yaml \
+		apps/recommendation/score.yaml \
+		apps/shipping/score.yaml
+		--output catalog-info.yaml
+	sed 's,$$GITHUB_REPO,Humanitec-DemoOrg/onlineboutique-demo,g' -i catalog-info.yaml
