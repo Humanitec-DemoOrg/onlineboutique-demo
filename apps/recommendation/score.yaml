@@ -5,7 +5,7 @@ metadata:
     tags: "golang,backend,grpc"
 containers:
   recommendation:
-    image: us-central1-docker.pkg.dev/google-samples/microservices-demo/recommendationservice:v0.10.3
+    image: us-central1-docker.pkg.dev/google-samples/microservices-demo/recommendationservice:v0.10.2
     variables:
       DISABLE_PROFILER: "1"
       PORT: "8080"
