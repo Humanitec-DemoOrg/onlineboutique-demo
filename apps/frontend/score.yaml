@@ -32,8 +32,8 @@ containers:
       RECOMMENDATION_SERVICE_ADDR: "${resources.recommendation.name}:8080"
       SHIPPING_SERVICE_ADDR: "${resources.shipping.name}:50051"
       SHOPPING_ASSISTANT_SERVICE_ADDR: "not-used-yet:8080"
-      CYMBAL_BRANDING: "false"
-      FRONTEND_MESSAGE: ""
+      CYMBAL_BRANDING: "true"
+      FRONTEND_MESSAGE: "Hello, World!"
       ENABLE_ASSISTANT: "false"
     resources:
       limits:
